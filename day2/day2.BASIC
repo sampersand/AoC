@@ -1,6 +1,9 @@
 000 CLEAR : HOME
 010 REM Solves https://adventofcode.com/2020/day/2
 020 REM Run this on https://www.calormen.com/jsbasic/
+030 REM I used these as reference:
+040 https://www.calormen.com/jsbasic/reference.html
+050 http://www.landsnail.com/a2ref.htm
 
 100 REM Part 1
 110 SM = 0
