@@ -1,10 +1,10 @@
 000 CLEAR : HOME
-005 REM Apple II BASIC
-010 REM Solves https://adventofcode.com/2020/day/2
-020 REM Run this on https://www.calormen.com/jsbasic/
-030 REM I used these as reference:
-040 https://www.calormen.com/jsbasic/reference.html
-050 http://www.landsnail.com/a2ref.htm
+010 REM Apple II BASIC
+020 REM Solves https://adventofcode.com/2020/day/2
+030 REM Run this on https://www.calormen.com/jsbasic/
+040 REM I used these as reference:
+050 REM https://www.calormen.com/jsbasic/reference.html
+060 REM http://www.landsnail.com/a2ref.htm
 
 100 REM Part 1
 110 SM = 0
