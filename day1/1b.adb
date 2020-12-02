@@ -1,6 +1,4 @@
--- Ada
--- https://adventofcode.com/2020/day/1
--- See bottom of file for input text.
+-- Pipe the Input file to Stdin.
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Containers.Vectors;
@@ -11,11 +9,7 @@ procedure Main is
 	use Integer_Vectors;
 
 	-- Reads lines from an input file and returns an array of integers.
-	function Read_Input_Lines
-		(Input_File : File_Type := Standard_Input)
-	return
-		Vector
-	is
+	function Read_Input_Lines (Input_File : File_Type) return Vector is
 		N : Integer;
 		V : Vector;
 	begin
@@ -28,7 +22,7 @@ procedure Main is
 		return V;
 	end Read_Input_Lines;
 
-	Numbers : Vector := Read_Input_Lines;
+	Numbers : Vector := Read_Input_Lines (Standard_Input);
 	N : Integer;
 	M : Integer;
 begin
