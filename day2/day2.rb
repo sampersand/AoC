@@ -3,7 +3,7 @@ lines = open('day2.txt').each_line
   .compact
 
 part1 = lines.count { (_1.._2).include? _4.count(_3) }
-part2 = lines.count { (_1[_3-1] == _2) ^ (_1[_4-1] == _2) }
+part2 = lines.count { (_1[_3 - 1] == _2) ^ (_1[_4 - 1] == _2) }
 
 puts "Part1: #{part1}"
 puts "Part1: #{part2}"
