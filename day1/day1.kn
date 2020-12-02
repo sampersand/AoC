@@ -16,4 +16,5 @@
       : = j + 1 j             #      ELSE: j = 1 + j
   : = i + 1 i                 #   i = 1 + i
 
+# Shortened, lol:
 ;=n 0;W=xPE+++'_n'=n+1n'='x;=i 1:W>n i;=j 0;=aE+'_n'i;W>n j;=x+a=bE+'_n'jI&>2021x<2019x;O*a bQ0=j+1j=i+1i

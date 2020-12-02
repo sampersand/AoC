@@ -11,14 +11,3 @@ nums.enumerate((n, i) -> {
 		}
 	})
 })
-
-# 0.upto(nums.len()).each(i -> {
-# 	n = nums.get(i);
-# 	i.upto(nums.len()).each(j -> {
-# 		m = nums.get(j);
-# 		if (n + m == 2020) {
-# 			disp(n * m);
-# 			quit();
-# 		}
-# 	})
-# })
