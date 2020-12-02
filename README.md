@@ -1,8 +1,10 @@
 # AoC2020
-Advent of code 2020.Each day, we use a different programming language!
+Advent of code 2020.
+Each day, we use a different programming language!
 
 ## List
 There's only 25 days, but 26 letters. Idk which day to skip. Probably `W`.
+I picked languages I don't have any knowledge of and I'd like to learn.
 ```text
 Day  1: Ada (APL?) 
 Day  2: BASIC
@@ -29,4 +31,5 @@ Day 22: Vala
 Day ??: Wolfram Language (Wasm by hand?)
 Day 23: Xojo
 Day 24: Yorik
-Day 25: Zig```
+Day 25: Zig
+```
