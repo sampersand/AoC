@@ -27,8 +27,8 @@ lines = Io.File('day3.txt')
 	.map([(right, down)] -> {
 		lines
 			.enumerate((line, idx) -> { [line, idx] })
-			.reject( ([_, idx],) -> { (idx + 1) % down })
-			.select( ([line, idx],) -> { '#' == line[(idx * right) % line.len()] })
+			.reject([(_, idx)] -> { (idx + 1) % down })
+			.select([(line, idx)] -> { '#' == line[(idx * right) % line.len()] })
 			.len()
 			.tap(count -> { (right == 3).then(print << "Part 1: " << count) })
 	})
