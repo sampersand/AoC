@@ -13,6 +13,7 @@ lines = open('day3.txt', &:read)
 			.map(&:first)
 			.count { |line, idx| line[(idx * r) % line.length] == '#' }
 			.tap { r == 3 and puts "Part 1: #{_1}" }
+			.tap { puts _1 }
 	end
 	.reduce(&:*)
 	.tap { puts "Part 2: #{_1}"  }
