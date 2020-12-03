@@ -10,8 +10,7 @@ lines = open('day3.txt')
 			.lazy
 			.each_slice(d)
 			.map(&:first)
-			.reduce([0, 0]) { [_1[(_2 += r) % _1.length] == '#', _2] }
-			.f
+			.count { _1[(idx += r) % _1.length] == '#' }
 	end
 	.reduce(&:*)
 	.tap { puts "Part 1/2: #{_1}"  }
