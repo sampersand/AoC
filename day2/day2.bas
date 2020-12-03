@@ -1,9 +1,10 @@
 000 CLEAR : HOME
-010 REM Solves https://adventofcode.com/2020/day/2
-020 REM Run this on https://www.calormen.com/jsbasic/
-030 REM I used these as reference:
-040 https://www.calormen.com/jsbasic/reference.html
-050 http://www.landsnail.com/a2ref.htm
+010 REM Apple II BASIC
+020 REM Solves https://adventofcode.com/2020/day/2
+030 REM Run this on https://www.calormen.com/jsbasic/
+040 REM I used these as reference:
+050 REM https://www.calormen.com/jsbasic/reference.html
+060 REM http://www.landsnail.com/a2ref.htm
 
 100 REM Part 1
 110 SM = 0
@@ -20,7 +21,7 @@
 220 GOTO 500
 
 500 REM Part 2
-510 RESTORE : REM Reset DATA counter so we can read agian
+510 RESTORE : REM Reset DATA counter so we can read again
 520 SM = 0 : REM SUM = 0
 530 FOR DN = 1 TO 1000
 540 GOSUB 1000 : REM Fetch the next line
