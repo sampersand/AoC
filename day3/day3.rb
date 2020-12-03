@@ -1,5 +1,5 @@
-lines = open('day3.txt')
-	.each_line
+lines = open('day3.txt', &:read)
+	.lines
 	.map(&:chomp)
 	.drop(1)
 
@@ -11,6 +11,7 @@ lines = open('day3.txt')
 			.each_slice(d)
 			.map(&:first)
 			.count { _1[(idx += r) % _1.length] == '#' }
+			.tap { r == 3 and puts "Part 1: #{_1}" }
 	end
 	.reduce(&:*)
-	.tap { puts "Part 1/2: #{_1}"  }
+	.tap { puts "Part 2: #{_1}"  }
