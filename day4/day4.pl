@@ -21,7 +21,7 @@ for (<>) {
 	            /eyr (@{[2020..2030]})/ &&
 	            /ecl (amb|blu|brn|gry|grn|hzl|oth)/ &&
 	            /pid \d{9}/ &&
-	            /hcl #[\da-f]/i &&
+	            /hcl #[\da-f]{6}/i &&
 	            /hgt ((@{[150..193]})cm|(@{[59..76]})in)/;
 }
 
