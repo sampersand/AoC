@@ -3,7 +3,7 @@ lines = open('day3.txt', &:read)    # Open thee file `day3.txt` and read the ent
   .map(&:chomp)                     # Strip off trailing newlines
 
 [[1,1], [3,1], [5,1], [7,1], [1,2]] # List of `[right, down]` to try
-  .map do |right, down|             # For every right and down...
+  .map { |right, down|              # For every right and down...
     lines                           # ... take the list of lines
       .each_with_index              # ... and get an array of `[line, index]`
       .drop(1)                      # ... delete the first line
@@ -15,6 +15,6 @@ lines = open('day3.txt', &:read)    # Open thee file `day3.txt` and read the ent
       .tap { |n|                    # Print part 1 if we're going down 3.
         puts "Part 1: #{n}" if right == 3
       }
-  end
+  }
   .reduce(&:*)                      # ... get the product of the list
   .tap { |n| puts "Part 2: #{n}" }  # ... and print the result out

@@ -4,10 +4,7 @@ List.'=' = (self, rhs, scope) -> {
 	scope = scope.or(:1);
 	rhs = rhs.@list().clone();
 
-	self.each({
-		value = if (_0.get(0) == '*', { _0.shift(); rhs }, rhs.shift);
-		_0.'='(value, scope);
-	});
+	self.each({ _0.'='(rhs.shift(), scope); });
 };
 
 # Reducing for Lists.
@@ -24,11 +21,11 @@ lines = Io.File('day3.txt')
 	.reject(Text::empty?);
 
 [[1,1], [3,1], [5,1], [7,1], [1,2]]
-	.map([(right, down)] -> {
+	.map( [(right, down)] -> {
 		lines
-			.enumerate((line, idx) -> { [line, idx] })
-			.reject([(_, idx)] -> { (idx + 1) % down })
-			.select([(line, idx)] -> { '#' == line[(idx * right) % line.len()] })
+			.enumerate( (line, idx) -> { [line, idx] })
+			.reject( [(_, idx)] -> { (idx + 1) % down } )
+			.select( [(line, idx)] -> { '#' == line[(idx * right) % line.len()] } )
 			.len()
 			.tap(count -> { (right == 3).then(print << "Part 1: " << count) })
 	})
