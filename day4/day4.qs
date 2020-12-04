@@ -1,24 +1,38 @@
-# HEEEY Leaderboard 72
+List.include? = (self, ele) -> { self.index(ele) != null };
+List.'=' = (self, rhs, scope) -> {
+	scope = scope.or(:1);
+	rhs = rhs.@list().clone();
+
+	self.each({ _0.'='(rhs.shift(), scope); });
+};
+
 Io.File('day4.txt')
 	.lines()
-	
-	# .chunk_while { !_2.empty? }
-	# .map { _1.reject(&:empty?) }
-	# .map { _1.join(' ').split(/[: ]/).each_slice(2).to_h }
-	# .each { _1.delete 'cid' }
-	# .tap { |stream|
-	# 	stream.map(&:keys)
-	# 		.map(&:sort)
-	# 		.map { %w(byr ecl eyr hcl hgt iyr pid) - _1 }
-	# 		.count(&:empty?)
-	# 		.tap { puts "Part 1: #{_1}" }
-	# }
-	# .select { (1920..2002).include? _1['byr'].to_i }
-	# .select { (2010..2020).include? _1['iyr'].to_i }
-	# .select { (2020..2030).include? _1['eyr'].to_i }
-	# .select { _1['hgt'] =~ /(\d+)(cm|in)/ and ($2 == 'cm' ? 150..193 : 59..76).include? $1.to_i }
-	# .select { _1['hcl']&.match? /#\h{6}/ }
-	# .select { %w(amb blu brn gry grn hzl oth).include? _1['ecl'] }
-	# .select { _1['pid']&.match? /\d{9}/ }
-	# .count
-	# .tap { puts "Part 2: #{_1}" }
+	.chunk_while(Text::@bool)
+	.map(lines -> {
+		passport = :0;
+		/\w+:[^ ]+/
+			.scan(lines.reject(Text::empty?).join(' '))
+			.map({ _0.split(':') })
+			.each({ passport.(_0[0]) = _0[1] });
+		:0
+	})
+	.tap(stream -> {
+		stream.map(Pristine::__keys__)
+			.map({ ['byr', 'ecl', 'eyr', 'hcl', 'hgt', 'iyr', 'pid'] - _0 })
+			.select(List::empty?)
+			.len()
+			.tap(print << "Part 1: ")
+	})
+	.select({ _0.?byr.or(0).@num().between?(1920, 2002) })
+	.select({ _0.?iyr.or(0).@num().between?(2010, 2020) })
+	.select({ _0.?eyr.or(0).@num().between?(2020, 2030) })
+	.select(pp -> {
+		(_, scale, unit) = pp.?hgt.then_into(/(\d+)(cm|in)/.match).else(return);
+		scale.@num().between?.apply(ifl(unit == "cm", [150, 193], [59, 76]))
+	})
+	.select({ _0.?hcl.then_into(/#[\da-f]{6}/.match?) })
+	.select({ _0.?ecl.then_into(['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].include?) })
+	.select({ _0.?pid.then_into(/\d{9}/.match?) })
+	.len()
+	.tap(print << "Part 2: ");
