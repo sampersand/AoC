@@ -8,7 +8,7 @@ $"='|';
 
 for (<>) {
 	chomp;
-	tr/: \n/  /;
+	tr/:/ /;
 
 	%_=split;
 	delete $_{cid};
