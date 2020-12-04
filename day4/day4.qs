@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Kernel.object = { {:0}() };
+=======
+#### These will eventually be implemented in the std lib:
+>>>>>>> ba0637ea842746e09bb5a214fb0701bf7c7d3ce2
 List.include? = (self, ele) -> { self.index(ele) != null };
 List.'=' = (self, rhs, scope) -> {
 	scope = scope.or(:1);
@@ -7,6 +11,7 @@ List.'=' = (self, rhs, scope) -> {
 	self.each({ _0.'='(rhs.shift(), scope); });
 };
 
+#### ACTUAL SOLUTION STARTS HERE
 Io.File('day4.txt')
 	.lines()
 	.chunk_while(Text::@bool)
