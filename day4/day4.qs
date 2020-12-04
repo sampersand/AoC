@@ -1,3 +1,4 @@
+#### These will eventually be implemented in the std lib:
 List.include? = (self, ele) -> { self.index(ele) != null };
 List.'=' = (self, rhs, scope) -> {
 	scope = scope.or(:1);
@@ -6,6 +7,7 @@ List.'=' = (self, rhs, scope) -> {
 	self.each({ _0.'='(rhs.shift(), scope); });
 };
 
+#### ACTUAL SOLUTION STARTS HERE
 Io.File('day4.txt')
 	.lines()
 	.chunk_while(Text::@bool)
