@@ -2,7 +2,6 @@
 xs = DATA.read.tr("FBLR", "0101").lines.map { _1.to_i 2 }
 
 puts xs.max
-puts 1.upto(xs.max).sum - xs.sum
 puts [*xs.min .. xs.max] - xs
 
 __END__
