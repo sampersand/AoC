@@ -1,5 +1,6 @@
 # HEEEY Leaderboard 72
-$/ = "";
+$/ = ""; # Paragraph mode ftw
+
 open('day4.txt')
 	.each_line
 	.map(&:chomp)
