@@ -9,7 +9,7 @@ I picked languages I don't have any knowledge of and I'd like to learn.
 Day  1: Ada (APL?) 
 Day  2: BASIC
 Day  3: Clojure, Cobol
-Day  4: Dart, Delphi
+Day  4: Dart, ~~Delphi~~ (not doing delphi)
 Day  5: Eiffel, Elixir, Elm, Erlang
 Day  6: Forth, F#, FORTRAN
 Day  7: Go
@@ -33,3 +33,4 @@ Day 23: Xojo
 Day 24: Yorik
 Day 25: Zig
 ```
+x

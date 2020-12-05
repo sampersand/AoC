@@ -1,8 +1,27 @@
-# Inspired by a conversation with someone on Discord.
-xs = DATA.read.tr("FBLR", "0101").lines.map{ _1.to_i 2 }
+# This code i submitted. It's awful, and I don't like it lol.
+def doit(x, up, down, max)
+	l = (0..max).to_a
+	x.each_char do |c|
+		if c == up
+			l.slice!(l.length / 2..)
+		else
+			l.slice!(..l.length / 2-1)
+		end
+	end
+	l[0]
+end
 
-puts xs.max
-puts [*xs.min .. xs.max] - xs
+def foo(a)
+	doit(a[0...'FBFBBFF'.length], 'F', 'B', 127) * 8 + (doit(a[-3..], 'L', 'R', 7))
+end
+
+
+l = open('day5.txt').each_line.map(&:chomp).map { foo _1 }
+
+puts l.max
+1.upto(l.max)
+	.find { l.include?(_1-1) && l.include?(_1+1) && !l.include?(_1) }
+	.display
 
 __END__
 BBBFBFFRLL

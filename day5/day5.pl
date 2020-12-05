@@ -1,20 +1,7 @@
-use List::Util qw( min max );
-open STDIN, "day5.txt";
-
-# for (<>) {
-
-# }
-
-@_ = map { tr/FBLR/0101/; oct "0b$_"; } (<>);
-print max(@_), "\n";
-@x = (min @_)..(max @_);
-delete $x{@_};
-print $x[1];
-
-# xs = DATA.read.tr("FBLR", "0101").lines.map{ _1.to_i 2 }
-
-# puts xs.max
-# puts [*xs.min .. xs.max] - xs
+# Cursed perl.
+use List::Util qw(min max sum);$\="\n";$,=' ';
+print'Part','1:',$_=max@_=map{tr/FBLR/0101/;oct"0b$_"}<DATA>;
+print'Part','2:',sum(min(@_)..$_)- sum@_;
 
 __DATA__
 BBBFBFFRLL
