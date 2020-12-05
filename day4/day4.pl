@@ -1,28 +1,25 @@
 # NOT idiomatic Perl.
-# I just wanted to see how asinine I could make it. I could have made one
-# entire regex for part 2, but it didn't as much of a "wtf" factor.
+# I just wanted to see how asinine I could make it.
 open STDIN, 'day4.txt';
 
 $/='';
 $"='|';
 
 for (<>) {
-	chomp;
-	tr/:/ /;
+	s/cid:\S+//;
 
-	%_=split;
-	delete $_{cid};
+	7 == split or next;
+	$part1++;
 
-	next unless 7 == keys %_;
-
-	++$part1;
-	++$part2 if /byr (@{[1920..2002]})/ &&
-	            /iyr (@{[2010..2020]})/ &&
-	            /eyr (@{[2020..2030]})/ &&
-	            /ecl (amb|blu|brn|gry|grn|hzl|oth)/ &&
-	            /pid \d{9}/ &&
-	            /hcl #[\da-f]{6}/i &&
-	            /hgt ((@{[150..193]})cm|(@{[59..76]})in)/;
+	$part2++ if (join "", sort split) =~ /
+		byr:(@{[1920..2002]})
+		ecl:(amb|blu|brn|gr[yn]|hzl|oth)
+		eyr:20(2\d|30)
+		hcl:\#[0-9a-fA-F]{6}
+		hgt:((@{[150..193]})cm|(@{[59..76]})in)
+		iyr:20(1\d|20)
+		pid:\d{9}
+	/x;
 }
 
 print <<EOS

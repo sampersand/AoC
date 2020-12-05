@@ -1,10 +1,9 @@
 # HEEEY Leaderboard 72
+$/ = "";
 open('day4.txt')
 	.each_line
 	.map(&:chomp)
-	.chunk_while { !_2.empty? }
-	.map { _1.reject(&:empty?) }
-	.map { _1.join(' ').split(/[: ]/).each_slice(2).to_h }
+	.map { _1.split(/[:\s]/).each_slice(2).to_h }
 	.each { _1.delete 'cid' }
 	.tap { |stream|
 		stream.map(&:keys)
