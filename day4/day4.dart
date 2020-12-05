@@ -21,19 +21,19 @@ main() {
 	
 	for (var group in groups) {
 		group.remove("cid");
+
 		if (group.length != 7)
 			continue;
+
 		++part1;
 
-		// The `== true` is required, betcause `?.` can be `null`---which doesn't allow for 
-		// unary negation with `!`---and because `isBetween` returns a `bool`.
-		if (int.parse(group['byr']).isBetween(1920, 2002) != true)
+		if (!int.parse(group['byr']).isBetween(1920, 2002))
 			continue;
 
-		if (int.parse(group['iyr']).isBetween(2010, 2020) != true)
+		if (!int.parse(group['iyr']).isBetween(2010, 2020))
 			continue;
 
-		if (int.parse(group['eyr']).isBetween(2020, 2030) != true)
+		if (!int.parse(group['eyr']).isBetween(2020, 2030))
 			continue;
 
 		if (!['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].contains(group['ecl']))
@@ -46,7 +46,6 @@ main() {
 			continue;
 
 		var m = RegExp(r"(\d+)(cm|in)").firstMatch(group['hgt']);
-
 		if (m == null)
 			continue;
 
