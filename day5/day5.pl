@@ -1,3 +1,22 @@
+use List::Util qw( min max );
+open STDIN, "day5.txt";
+
+# for (<>) {
+
+# }
+
+@_ = map { tr/FBLR/0101/; oct "0b$_"; } (<>);
+print max(@_), "\n";
+@x = (min @_)..(max @_);
+delete $x{@_};
+print $x[1];
+
+# xs = DATA.read.tr("FBLR", "0101").lines.map{ _1.to_i 2 }
+
+# puts xs.max
+# puts [*xs.min .. xs.max] - xs
+
+__DATA__
 BBBFBFFRLL
 FBBBBBFRRR
 FBFFBBBRLR
