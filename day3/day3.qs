@@ -9,11 +9,11 @@ List.'=' = (self, rhs, scope) -> {
 
 # Reducing for Lists.
 List.reduce = (self, func) -> {
-	self = self.clone();
-	acc = self.shift();
-	self.each(n -> { :1.acc = func(acc, n) });
+	acc = self[0];
+	self.get(1,-1).each(n -> { :1.acc = func(acc, n) });
 	acc
 };
+
 
 #### ACTUAL SOLUTION STARTS HERE
 lines = Io.File('day3.txt')
