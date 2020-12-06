@@ -1,3 +1,5 @@
+# I Wrote this in anticipation of further use of day 4. It's useless now, and i just left it
+# here for posterity.
 require 'matrix'
 
 class Walker < Matrix

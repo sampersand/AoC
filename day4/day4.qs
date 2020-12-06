@@ -10,11 +10,13 @@ List.'=' = (self, rhs, scope) -> {
 #### ACTUAL SOLUTION STARTS HERE
 Io.File('day4.txt')
 	.lines()
-	.chunk_while(Text::@bool)
+	.chunk_while(~$@bool) # <-- this causes it to fail./
 	.map(lines -> {
 		passport = object();
 
-		lines.reject(Text::empty?)
+		lines
+			.reject(~$empty?)
+			.@list()
 			.join(' ')
 			.tap_into(/\w+:[^ ]+/.scan)
 			.map(line -> { line.split(':') })
@@ -22,10 +24,14 @@ Io.File('day4.txt')
 
 		passport
 	})
+	.tap(print)
+	.@list()
 	.tap(stream -> {
-		stream.map(Pristine::__keys__)
+		print("A");
+		quit();
+		stream.map(~$__keys__)
 			.map(['byr', 'ecl', 'eyr', 'hcl', 'hgt', 'iyr', 'pid'].'-')
-			.select(List::empty?)
+			.select(~$empty?)
 			.len()
 			.tap(print << "Part 1: ")
 	})

@@ -10,7 +10,7 @@ DATA
 	.display
 
 # Reset between parts
-puts;DATA.seek 0
+puts;DATA.seek 299
 
 # Part 2:
 $/="";

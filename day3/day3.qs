@@ -7,27 +7,22 @@ List.'=' = (self, rhs, scope) -> {
 	self.each({ _0.'='(rhs.shift(), scope); });
 };
 
-# Reducing for Lists.
-List.reduce = (self, func) -> {
-	acc = self[0];
-	self.get(1,-1).each(n -> { :1.acc = func(acc, n) });
-	acc
-};
 
 
 #### ACTUAL SOLUTION STARTS HERE
 lines = Io.File('day3.txt')
 	.lines()
-	.reject(Text::empty?);
+	.reject(~$empty?)
+	.@list();
 
 [[1,1], [3,1], [5,1], [7,1], [1,2]]
-	.map( [(right, down)] -> {
+	.map( ([right, down],) -> {
 		lines
-			.enumerate( (line, idx) -> { [line, idx] })
-			.reject( [(_, idx)] -> { (idx + 1) % down } )
-			.select( [(line, idx)] -> { '#' == line[(idx * right) % line.len()] } )
+			.enumerate()
+			.reject( ([_, idx],) -> { (idx + 1) % down } )
+			.select( ([line, idx],) -> { '#' == line[(idx * right) % line.len()] } )
 			.len()
 			.tap(count -> { (right == 3).then(print << "Part 1: " << count) })
 	})
-	.reduce(Number::'*')
+	.prod()
 	.tap(print << "Part 2: ")

@@ -1,11 +1,22 @@
+#### These will eventually be implemented in the std lib:
+List.'=' = (self, rhs, scope) -> {
+	scope = scope.or(:1);
+	rhs = rhs.@list().clone();
+
+	self.each({ _0.'='(rhs.shift(), scope); });
+};
+
+#### ACTUAL SOLUTION STARTS HERE
 nums = Io.File("day1.txt")
 	.lines()
-	.reject(Text::empty?)
-	.map(Text::@num);
+	.reject(~$empty?)
+	.map(~$@num)
+	.@list();
 
-nums.enumerate((x, i) -> {
-	nums[i, -1].each(y -> {
-		(x + y == 2020).then(quit << 0 << x * y)
-	})
-})
-
+nums
+	.enumerate()
+	.each(([x, i],) -> {
+		(nums[i, -1]).each(y -> {
+			(x + y == 2020).then(quit << 0 << x * y)
+		})
+	});

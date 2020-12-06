@@ -1,6 +1,12 @@
-# Helper method until i get patterns working
-List.countx = (self, fn) -> { self.count(fn.apply) };
-List.mapx   = (self, fn) -> { self.map(fn.apply) };
+#### These will eventually be implemented in the std lib:
+List.'=' = (self, rhs, scope) -> {
+	scope = scope.or(:1);
+	rhs = rhs.@list().clone();
+
+	self.each({ _0.'='(rhs.shift(), scope); });
+};
+
+#### ACTUAL SOLUTION STARTS HERE
 
 # The file to read is the first command line arg, but
 # defaults to `day2.txt`.
@@ -15,20 +21,17 @@ lines =
 		# The entire matched string is stored in index zero.
 		.map(/^(\d+)-(\d+) (.): (.*)$/.match)
 		# Ignore lines that don't match.
-		.reject(List::empty?)
+		.reject(~$empty?)
 		# Convert the resulting types to usable values.
-		.mapx((_, min, max, chr, str) -> {
+		.map(([_, min, max, chr, str],) -> {
 			[str, chr, min.@num(), max.@num()]
-		});
+		})
+		.@list();
 
 lines
-	.countx((str, chr, min, max) -> {
-		str.count(chr).between?(min, max)
-	})
+	.count(([str, chr, min, max],) -> { str.count(chr).between?(min, max) })
 	.tap(print << "Part1: ");
 
 lines
-	.countx((str, chr, min, max) -> {
-		(str.get(min - 1) == chr) ^ (str.get(max - 1) == chr)
-	})
+	.count(([str, chr, min, max], ) -> { (chr == str[min - 1]) ^ (chr == str[max - 1]) })
 	.tap(print << "Part2: ");
