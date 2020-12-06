@@ -1,3 +1,5 @@
+% Day 5 in Erlang.
+% I decided against the `tr` trick, as I wouldn't learn as much about the language.
 -module(day5).
 -export([main/1]).
 -import(string, [slice/3]).
@@ -19,13 +21,10 @@ readlines() ->
 	end.
 
 main (_) ->
-	% Lines = lists:map(fun sum_line/1, lists:reverse(readlines())),
-	Total = map(fun (X) -> sum_line(X) end, lists:reverse(readlines())),
-
+	Total = map(fun (X) -> sum_line(X) end, readlines()),
 	
 	Min = min(Total),
 	Max = max(Total),
 
 	io:format("Part 1: ~B~n", [Max]),
 	io:format("Part 2: ~B~n", [nth(1, subtract(seq(Min, Max), Total))]).
-
