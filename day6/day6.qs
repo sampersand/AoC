@@ -8,6 +8,7 @@ Io.File('day6.txt')
 	.sum()
 	.tap(print << "Part 1: ");
 
+# work in progress
 # 6735
 # 3220[Finished in 0.3s]
 ##__EOF__##

@@ -56,5 +56,3 @@ main() {
 
 	print("Part 1: $part1\nPart 2: $part2");
 }
-
-	
