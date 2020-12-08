@@ -9,7 +9,6 @@ open('day4.txt')
 	.tap { |stream|
 		stream.map(&:keys)
 			.map(&:sort)
-			.each { puts _1 - %w(byr ecl eyr hcl hgt iyr pid) }
 			.map { %w(byr ecl eyr hcl hgt iyr pid) - _1 }
 			.count(&:empty?)
 			.tap { puts "Part 1: #{_1}" }
