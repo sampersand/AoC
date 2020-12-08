@@ -2,11 +2,12 @@
 # We build up a program and then `eval` it. GOTOs considered good.
 # To swap between nop and jmp, we change the '#' to 'g'.
 open A,"day8.txt";
-y/nj\n/#g /,s/.*/_$.:\$L{\$l=$.}++&&next;$_;\n/,s/acc/\$a+=/||
-s/;(.)..(.*);/;$1oto _@{[$.+$2]};/,push@l,$_ while<A>;
-for(0..$#l){%L=(),$l=$a=0,$l[$_]=~y/#g/g#/,eval"@l",last}
+y/nj\n/#g /,s/.*/_$.:\$L{$.}++&&next;$_);\n/,s/acc/\$a+=(/||s/;(.)../;$1oto'_'.($.+/,push@l,$_ while<A>;
+for(0..$#l){%L=$a=0,$l[$_]=~y/#g/g#/,eval"@l",last}
 continue{$l[$_]=~y/#g/g#/}print"Part2: $a"
 
+
+;
 =begin
 This one was extremely fun lol. Since Perl has `goto` ('cause, yknow, why wouldn't it?), I decided to build up the program and then evaluate it. Here's an example of what the built up code looks like that we evaluate: 
 ```pl
@@ -23,3 +24,14 @@ _10:$L{$l=10}++&&next;goto _481;
 ```
 To swap between `nop` and `jmp`, we change the `#` to `g` and toggle the comment.
 =cut
+
+__END__
+nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6
