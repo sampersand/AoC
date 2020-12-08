@@ -1,5 +1,5 @@
-# NOT idiomatic Perl.
-# I just wanted to see how asinine I could make it.
+# Day 4 in perl.
+# Awful.
 open STDIN, 'day4.txt';
 
 $/='';

@@ -14,9 +14,9 @@ open('day4.txt')
 			.count(&:empty?)
 			.tap { puts "Part 1: #{_1}" }
 	}
-	.select { ('1920'..'2002').include? _1['byr'] }
-	.select { ('2010'..'2020').include? _1['iyr'] }
-	.select { ('2020'..'2030').include? _1['eyr'] }
+	.select { (1920..2002).include? _1['byr'].to_i }
+	.select { (2010..2020).include? _1['iyr'].to_i }
+	.select { (2020..2030).include? _1['eyr'].to_i }
 	.select { _1['hgt'] =~ /(\d+)(cm|in)/ and ($2 == 'cm' ? 150..193 : 59..76).include? $1.to_i }
 	.select { _1['hcl'] =~ /#\h{6}/ }
 	.select { %w(amb blu brn gry grn hzl oth).include? _1['ecl'] }
