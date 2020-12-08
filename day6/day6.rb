@@ -3,22 +3,14 @@
 # PART 1:
 $/=""; # paragraph mode, you're my savior.
 
-DATA
-	.each_line
-	.map { _1.gsub(/\s/,"").chars.uniq.count }
-	.sum
-	.display
+DATA.each_line.map { _1.gsub(/\s/,"").chars.uniq.count }.sum.display
 
 # Reset between parts
 puts;DATA.seek 299
 
 # Part 2:
 $/="";
-DATA
-	.each_line
-	.map { _1.split.map(&:chars).reduce(&:&).count }
-	.sum
-	.display
+DATA.each_line.map { _1.split.map(&:chars).reduce(&:&).count }.sum.display
 
 __END__
 ymw
