@@ -4,7 +4,6 @@
 open A,"day8.txt";
 y/nj\n/#g /,s/.*/_$.:\$L{\$l=$.}++&&next;$_;\n/,s/acc/\$a+=/||
 s/;(.)..(.*);/;$1oto _@{[$.+$2]};/,push@l,$_ while<A>;
-print @l;
 for(0..$#l){%L=(),$l=$a=0,$l[$_]=~y/#g/g#/,eval"@l",last}
 continue{$l[$_]=~y/#g/g#/}print"Part2: $a"
 
