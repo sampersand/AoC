@@ -4,14 +4,13 @@ N = ARY
 	.each_cons(26)
 	.find { |*a, l| a.combination(2).map(&:sum).none? l }
 	.last
-	
+
 puts N
 
 2.upto(ARY.length)
 	.lazy
 	.filter_map { |n| ARY.each_cons(n).find { _1.sum == N } }
 	.first
-	.sort
 	.minmax
 	.sum
 	.display
