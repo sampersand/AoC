@@ -1,52 +1,27 @@
-=begin
-RRRRRRRRRRRRR               RRRRRRRRRRRR
-RRRRRRR  RRRRR              RRRRRRRRRRRRRR
-RRRRR      RRRR     RRR     RRRRRR     RRRR
-RRRRR      RRRR    RRRRR    RRRRR       RRRR
-RRRRR     RRRR      RRR     RRRRR       RRRR
-RRRRRRRRRRRRRR              RRRRRR     RRRR
-RRRRRRRRRRRRRR     RRRR     RRRRRRRRRRRRR 
-RRRRR    RRRR        RR     RRRRR
-RRRRR     RRRR       RR     RRRRR 
-RRRRR      RRRR      RR     RRRRR 
-RRRRR       RRRR     RR     RRRRR 
-RRRRR       RRRR   RRRRR    RRRRR   
-=cut
-open A, "day11.txt";
-while (<DATA>) {
-	chomp,y/L/0/,@_=split '';
-	$_[$_]eq'.'or$M{$.,$_}=$_[$_]for 0..($length=$#_);
-}
-$.=$#_ if$#_>$.;
+# Day 11 in perl.
+# Wowza. It technically works, but is slowwwww lol. perl's
+# not meant for this haha.
 
-sub step(&) {
-	$m=0,%N=%M;
-	$m=0,%N=%M;
-	($r,$c)=(split$;),$c=$_[0]->(),($e=$M{$_})?$c>=3+$PART:!$c and$m=1,$N{$_}=!$e for keys%M;
-	%M=%N,$m
-}
+while                          (<>){chomp
+;;y;L                          ;0;;01;@_=
+split               '';      $e=$_
+[+$_]              eq'.'     or$M{
+$.,$_               }=$    _[$_]for 0..          $#_}$#_
+<$.or                      $.=$#_;sub p        (&)     {;;
+$m=0,              %N=%      M;($r           ,$c       )=(+
+split                $;      ),$c=          $_[0]->(),($e=$
+M{$_}                )?      $c>=3          +$P
+:!-!!                $c      and$m           =1,        $N{
+$_}=!$e for keys     %M      ;%M=%            N,$m     }$P=
+01;%B=%M;$"='+';   while     (p{-$              M{$r,$c}+
 
-$PART=1;
-%B=%M;
-$"='+';
-0 while step{eval("@{[<\$M\\{$r+{-1,0,1},$c+{-1,0,1}\}>]}")-$M{$r,$c}};
-print "Part 1: " . grep(/1/, values(%M)), "\n";
-%M=%B;
-$"=' ';
-$PART=2;
-0 while step {
-	@d=();
-	$x=0,eval"@{[glob '$d\[$x++]//=\$M\{$r+{$_,-$_,0},$c+{$_,-$_,0}};']}"for 1..$.;
-	grep(/1/, @d) - $M{$r,$c};
-};
+eval("@{[<\$M\\{$r+{-1,0,1},$c+{-1,0,1}\}>]}")}){}print"Pa"
+,"rt 1: ".grep(/1/,values%M),"\n";%M=%B;$"=' ';$P=2;while(p
+{@d=();$x=0,eval"@{[glob '$d\[$x++]//=\$M\{$r+{$_,-$_,0},$\
+c+{$_,-$_,0}};']}"for 1..$.;grep(/1/, @d) - $M{$r,$c}}){};;
+print"Part 2: ".grep(/1/,values%M),"\n"# Day 11, RIP Conway
 
-print "Part 2: " . grep(/1/, values(%M)), "\n";
-# for$x(0..$.){
-# 	print $M{$x,$_} for(0..$.);
-# 	print "\n";
-# }
-
-__DATA__
+__DATA__	
 L.LL.LL.LL
 LLLLLLL.LL
 L.L.L..L..
