@@ -1,6 +1,6 @@
 # Day 11 in perl.
-# Wowza. It technically works, but is slowwwww lol. perl's
-# not meant for this haha.
+# Wowza. It technically works, but is slowwwww lol (48 secs
+# for part 1 with real data). Perl's not meant for this haha
 
 while                          (<>){chomp
 ;;y;L                          ;0;;01;@_=
