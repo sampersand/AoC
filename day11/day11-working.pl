@@ -1,19 +1,7 @@
-=begin
-RRRRRRRRRRRRR               RRRRRRRRRRRR
-RRRRRRR  RRRRR              RRRRRRRRRRRRRR
-RRRRR      RRRR     RRR     RRRRRR     RRRR
-RRRRR      RRRR    RRRRR    RRRRR       RRRR
-RRRRR     RRRR      RRR     RRRRR       RRRR
-RRRRRRRRRRRRRR              RRRRRR     RRRR
-RRRRRRRRRRRRRR     RRRR     RRRRRRRRRRRRR 
-RRRRR    RRRR        RR     RRRRR
-RRRRR     RRRR       RR     RRRRR 
-RRRRR      RRRR      RR     RRRRR 
-RRRRR       RRRR     RR     RRRRR 
-RRRRR       RRRR   RRRRR    RRRRR   
-=cut
+$;=';';
 open A, "day11.txt";
-while (<DATA>) {
+
+while (<A>) {
 	chomp,y/L/0/,@_=split '';
 	$_[$_]eq'.'or$M{$.,$_}=$_[$_]for 0..($length=$#_);
 }
@@ -33,6 +21,7 @@ $"='+';
 print "Part 1: " . grep(/1/, values(%M)), "\n";
 %M=%B;
 $"=' ';
+# exit;
 $PART=2;
 0 while step {
 	@d=();
