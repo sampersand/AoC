@@ -1,5 +1,5 @@
 # Day 12. we rode a ferry.
-open STDIN, 'day12.txt';
+open STDIN, 'day12.txt'; // You can omit this if you're just piping in.
 
                        @t[
                        2..3]
