@@ -20,8 +20,8 @@ LINES
 		when 'S' then waypoint -= 1i*num
 		when 'E' then waypoint += num
 		when 'W' then waypoint -= num
-		when 'L' then waypoint = waypoint.real * 1i**(num/90) + waypoint.imag * 1i * 1i**(num/90)
-		when 'R' then waypoint = waypoint.real * (-1i)**(num/90) + waypoint.imag * 1i * (-1i)**(num/90)
+		when 'L' then waypoint *= 1i**(num/90)
+		when 'R' then waypoint *= 1i**(-num/90)
 		when 'F' then ship += num * waypoint
 		end
 		[ship, waypoint]
