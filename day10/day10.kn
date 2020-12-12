@@ -1,0 +1,52 @@
+# methods
+; = get BLOCK EVAL + "_line" idx
+; = set BLOCK EVAL +++ '= _line' idx ' ' val
+
+# read lines in
+; = idx 0
+; = _line0 0
+; WHILE (= val PROMPT)
+	; = val + 0 val
+	; = idx + idx 1
+	: CALL set
+; = linecount idx
+
+# SORT them. bubble sort lmao
+; = found TRUE
+; WHILE found
+	; = found FALSE
+	; = idx 0
+	: WHILE < idx linecount
+		; = lhs CALL get
+		; = idx + idx 1
+		; = rhs CALL get
+		: IF < rhs lhs
+			; = found TRUE
+			; = idx - idx 1
+			; = val rhs
+			; CALL set
+			; = idx + idx 1
+			; = val lhs
+			: CALL set
+			: NULL
+; = idx linecount
+; = val + 3 CALL get
+; CALL set
+
+# part 1
+; = idx 0
+; = num3 = num1 1
+; WHILE < idx linecount
+	; = diff - 0 - (= x CALL get) (; = idx + idx 1 CALL get)
+	: IF ? diff 1
+		: = num1 + num1 1
+		: IF ? diff 3 
+			: = num3 + num3 1
+			: 0
+: OUTPUT * num3 num1
+
+# SHORTENED 
+;=gB E+'_'i;=sB E+++'=_'i' 'v;=i=_0 0;W=vP;=v+0v;=i+1iCs
+;=n=f i;Wf;=fF;=i 0W<i n;=lCg;=i+1i;=rCgI<r l;=fT;=i-i 1
+;=v r;Cs;=i+1i;=v lCsN;=i n;=v+3Cg;Cs;=i 0;=a=b 1;W<i n;
+=d-0-Cg;=i+1iCgI?1d=a+1aI?3d=b+1bN O+"Part 1: "*a b

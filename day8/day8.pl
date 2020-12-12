@@ -5,7 +5,6 @@ open A,'day8.txt';
 y/nj\n/#g /,s/.*/_$.:\$L{$.}++&&(y|#g|g#|,next);$_);\n/,s/acc/\$a+=(/||s/;(.)../;$1oto'_'.($.+/,push@l,$_ while<A>;
 %L=$a=0,y/#g/g#/,eval"@l",last for@l;print"Part2: $a"
 
-
 ;
 =begin
 Since Perl has `goto` ('cause, yknow, why wouldn't it?), I decided to build up the program and then evaluate it. Here's an example of what the built up code looks like that we evaluate: 
