@@ -1,4 +1,4 @@
-x = DATA.each_line
+x = DATA.each
 early = x.next.to_i
 times = x.next.tr('x','1').split(',').map(&:to_i)
 
