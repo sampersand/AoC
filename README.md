@@ -1,6 +1,7 @@
 # AoC2020
 Advent of code 2020.
 Each day, we use a different programming language!
+NOTE: My personal laptop took a fall and the screen no longer works, so I'm using a loner for now. I can't download arbitrary langs on it, so I'll fill in the rest of the langs after I get a new laptop.
 
 ## List
 There's only 25 days, but 26 letters. Idk which day to skip. Probably `W`.
