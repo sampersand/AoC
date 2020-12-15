@@ -1,0 +1,3 @@
+$/=',';chop,$M{$_}=[$.,$.]while<>;
+$x=$M{$l=$M{$l}[0]-$M{$l}[1]}//=[$.,$.],(2020==$.and$o=$l),pop$x,unshift$x,$.until$.++==2020;
+print"Part 1: $o\nPart 2: $l\n";
