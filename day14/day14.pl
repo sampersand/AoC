@@ -1,6 +1,6 @@
 # Day 14 in perl.
 # we had to simulate a part of a computer.
-open STDIN,"day14.txt"; # omit this if reading from sdib.
+open STDIN,"day14.txt"; # omit this if piping in.
 
 
  for  (+  <>  ){  m#  k\  =\  #x  ?($
