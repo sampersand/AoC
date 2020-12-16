@@ -13,7 +13,7 @@ nearby =
 	gets.split("\n")
 		.drop(1)
 		.map { _1.split(',').map(&:to_i) }
-		.tap { |l| puts "Part 1: #{l.flatten.select { |f| rules.values.none? { _1.call f} }.sum}"}
+		.tap {}
 		.select { |ticket| ticket.none? { |field| rules.values.none? { _1.call(field) } } }
 		.transpose
 
