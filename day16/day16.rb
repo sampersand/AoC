@@ -25,7 +25,6 @@ rules
 		acc[val = (vals - rest).first] = key
 		[acc, *rest, val]
 	}.first
-	.sort
 	.filter_map { _2.start_with? 'departure' and _1 }
 	.map { mine[_1] }
 	.reduce(&:*)
