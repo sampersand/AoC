@@ -1,52 +1,44 @@
 open STDIN, 'day17.txt';
 
-$;=',';
-while(<>){chomp,$x=0;$S{$x++,$.,0,0}=1 for split''}
 
-$x=0;$y=1;
-$"=',';
-$,="\n";
-# for (glob "{@{[$x-1..$x+1]}},{@{[$y-1..$y+1]}}"){
-# 	print "<$_>";
+                        while(<>){$x=chomp;for(split''){
+                      $x++,                        "#"eq
+                    +$_ and                      $;= $"=
+                  ","   ,$T                    {$x   ,$.
+                ,0,     0}=                  1}}     for
+              $P(       1,2                ){%       C=%
+            T;;         if(              1==         $P)
+         {%K=           ();            for           ((+
+        %C)){@_=split$;;pop@_;$K{"@_"}=$             C{$
+        _}}             ;%C          =%K}            for
+        (00             ..5          ){%             H=(
+        );;             for          (%C             ){$
+        H{+             $_}          ++,             000
+        for             (glob join$;,map{"{@{[$_-1..$_+1]
+        }}"             }split             $;)
+#       XXX             XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+#       XXX             XXX          XXX             XXX
+                        }BEGIN{*S=\&CORE::split; sub S{split@_}}
+#       XXX             XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+#       XXX           XXX            XXX           XXX
+#       XXX         XXX              XXX         XXX
+#       XXX       XXX                XXX       XXX
+#       XXX     XXX                  XXX     XXX
+#       XXX   XXX                    XXX   XXX  
+#       XXX XXX                      XXX XXX    
+#       XXXXX                        XXXXX
+#       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-# }
+# $;=$"=',';while(<>){chomp,$x=0;++$x,'#'eq$_ and$S{$x,$.,0,0}=1 for split''}$,="\n";for$P(1,2){%C=%S;if($P==1){(@_=split$;),pop@_,$C{"@_"}=delete$C{$_}for keys%C;}for(0..5){%H=();for(keys%C){++$H{$_}for glob join$;,map{"{@{[$_-1..$_+1]}}"}split$;}%K=();($x=$H{$_})==3||$x==4&&$C{$_}and$K{$_}=1 for keys%H;%C=%K;}print"Part $P: $#{[1,keys %C]}\n"}
 
-$"=',';
-for$P(0,1){
-	%C=%S;
-	for(0..6){
-		%H=();
-		for(keys%C){
-			($x,$y,$z,$w)=split$;;
-			for(glob "{@{[$x-1..$x+1]}},{@{[$y-1..$y+1]}},{@{[$z-1..$z+1]}},{@{[$w-1..$w+1]}}") {
-				++$H{$_}if !$P||$W
-			}
-		}
-		%K=();
-		for(keys %H) {
-			# print $_, $H{$_};
-			# exit;
-			if($H{$_} == 3 || $C{$_} && $H{$_ } == 4) {
-				$K{$_} =1 ;
-			}
-		}
-		# print keys %K;
-		%C=%K;
-	}
 
-	# print keys %C;
-	# exit;
-	print "Part $P: $#{[keys %C]}\n";
+
+
+    %K=();
+    ($x=$H{$_})==3||$x==4&&$C{$_}and$K{$_}=1 for%H;
+    %C=%K;
+  }
+
+  print "Part $P: $#{[1,keys %C]}\n";
+  die unless $#{[1,keys %C]} == ($P == 1 ? 263 : 1680);
 }
-# 		cube.each do |x, y, z, w|
-# 			[*x-1..x+1].product [*y-1..y+1], [*z-1..z+1], [*w-1..w+1] do |x2, y2, z2, w2|
-# 				next if part.zero? && !w2.zero?
-# 				hash[[x2, y2, z2, w2]] += 1
-# 			end
-# 		end
-
-# 		cube = hash.filter_map { |k, v| v == 3 || cube.include?(k) && v == 4 and k }.to_set
-# 	end
-
-# 	puts "Part #{part}: #{cube.length}"
-# end
