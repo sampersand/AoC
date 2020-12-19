@@ -1,49 +1,36 @@
-
-
-# $rules = 
-# 	DATA
-# 		.gets
-# 		.chomp
-# 		# .sub('8: 42', '\& | 42 8')
-# 		# .sub('11: 42 31', '\& | 42 11 31')
-# 		.lines("\n")
-# 		.map { _1 =~ /:(?: *"(.*)")?/ and [$`, $1 || $'.split('|').map(&:split)] }
-# 		.to_h
-# 		.transform_values { |ary|
-# 			next proc { _1&.shift == ary } if ary.is_a? String
-# 			proc { |l| y=l.dup; ary.any? { |e| e.all? { $rules[_1].call l } or (l=y.dup; false) } }
-# 		}
-
-# input = DATA.gets.split("\n")
-# p input.select { $rules['0'].call _1.chars }
-	# .display
-
-
-$/ = '';
 $stdin = open('day19.txt')
-$rules = {}
-eval \
-DATA.gets
-	.sub('8: 42','8: 42 8 | 42')
-	.sub('11: 42 31', '\& | 42 11 31')
-	.split("\n")
-	.map { 
-			_1
-			.gsub('|', ' x or (x=y) && ')
-			.gsub(/(\d+):/, '$rules[\1]=proc { |x| y=x; ')
-			.gsub(/(\d+)( |$)/, '(x=$rules[\1].call(x)) && ')
-			.gsub(/"(\w+)"/, '(x[0] == "\1" && x = x[1..]) &&') + ' x }' }
-	.join("\n")
-		.tap(&:display)
-$rules[11]=proc { |x| y=x; 
-	(x=$rules[42].call(x)) && ((x=$rules[31].call(x)) &&  x or
-	(x=y) &&  (x=$rules[42].call(x)) && (x=$rules[11].call(x)) &&
-	(x=$rules[31].call(x)) && x)
-}
-input = DATA.gets.split("\n")
-p input.select { ($rules[0].call(_1) || next).length.zero? }.length
-# p $rules
 
+rules=gets("\n\n")
+	.sub('8: 42','\& 8 | 42')
+	.sub('11: 42 31', '\& | 42 11 31')
+	.gsub(/\b\d+\s/,'\g<x\&>')
+	.gsub(/\d+:(.*)$/, '(?<x\1>\2)')
+	.gsub(/\s/,"")
+	# .display
+	# exit
+	.gsub('"','')
+	.gsub(/\A/,'(?=')
+	.gsub(/\z/,')?\A\g<x0>\Z')
+	.then { Regexp.new _1 }
+
+ARGF.count { rules =~ _1 }.tap(&:display)
+	# .split("\n")
+	# .map {
+
+	# 		_1
+	# 		.gsub('|', ' x or (x=y) && ')
+	# 		.gsub(/(\d+):/, '$rules[\1]=proc { |x| y=x; ')
+	# 		.gsub(/(\d+)( |$)/, '(x=$rules[\1].call(x)) && ')
+	# 		.gsub(/"(\w+)"/, '(x[0] == "\1" && x = x[1..]) &&') + ' x }' }
+	# .join("\n")
+# $rules[11]=proc { |x| y=x; 
+# 	(x=$rules[42].call(x)) && ((x=$rules[31].call(x)) &&  x or
+# 	(x=y) &&  (x=$rules[42].call(x)) && (x=$rules[11].call(x)) &&
+# 	(x=$rules[31].call(x)) && x)
+# }
+# input = DATA.gets.split("\n")
+# p input.select { ($rules[0].call(_1) || next).length.zero? }.length
+# p $rules
 # p input.
 __END__
 42: 9 14 | 10 1
