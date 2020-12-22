@@ -1,41 +1,47 @@
 sub play {
-	@p1=@{$_[0]}
+  @p1=@{$_[0]}
 }
-__END__
+=begin
 require 'set'
 
-def play(pl)
-	until pl.any?(&:empty?)
-		c = pl.map(&:shift)
+def play(p1, p2)
+  until p1.empty? || p2.empty?
+    c1, c2 = p1.shift, p2.shift
 
-		if (x = yield c).nil? ? c[1] < c[0] : x
-			pl.first.concat c
-		else
-			pl.last.concat c.reverse
-		end
-	end
+    if (x = yield c1, c2).nil? ? c2 < c1 : x
+      p1.append c1, c2
+    else
+      p2.append c2, c1
+    end
+  end
 
-	$ans = pl.first.reverse.unshift(0).each_with_index.map(&:*).sum
+  $ans = p1.reverse.unshift(0).each_with_index.map(&:*).sum
 end
 
-def recur(pl)
-	memo = Set.new
+def recur(p1,p2)
+  memo = Set.new
 
-	play pl do |c|
-		memo.add? pl.hash or return true
-		if c.zip(pl.map(&:length)).all? { _1 <= _2 }
-			recur pl.zip(c).map { _1.first _2 }
-		end
-	end
+  play p1,p2 do |c1, c2|
+    memo.add? [p1,p2].hash or return true
+    if c1 <= p1.length && c2 <= p2.length
+      recur p1.first(c1), p2.first(c2)
+    end
+  end
 
-	pl.last.empty?
+  p2.empty?
 end
 
-PL = open('day22.txt').each_line("\n\n").map { _1.chomp.lines.drop(1).map(&:to_i) }
-p play(PL.map(&:dup)) {}
-recur PL
+P1, P2 = open('day22.txt')
+  .each_line("\n\n")
+  .map(&:chomp)
+  .map(&:lines)
+  .map { _1.drop(1).map(&:to_i) }
+
+p play(P1.dup, P2.dup) {}
+recur P1, P2
 p $ans
 
+=cut
 __END__
 Player 1:
 9
