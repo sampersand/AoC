@@ -24,6 +24,4 @@ puts "Part 1: #{tiles.length}"
 		.then { tiles.replace _1 }
 end
 
-	puts "Part 2: #{tiles.length}"
-
-fail unless tiles.length == 3733
+puts "Part 2: #{tiles.length}"
