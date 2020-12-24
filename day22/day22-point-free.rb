@@ -11,7 +11,7 @@ def play(pl)
 		end
 	end
 
-	$ans = pl.first.reverse.unshift(0).each_with_index.map(&:*).sum
+	$ans = pl.max.reverse.unshift(0).each_with_index.map(&:*).sum
 end
 
 def recur(pl)
@@ -33,6 +33,6 @@ PL = open('day22.txt')
 	.map(&:lines)
 	.map { _1.drop(1).map(&:to_i) }
 
-p play(PL.map(&:dup)) {}
+p play(PL.map(&:dup).reverse) {}
 recur PL
 p $ans
