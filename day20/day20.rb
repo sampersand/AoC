@@ -95,6 +95,7 @@ grid =
 
 class String;
 	def monsters
+	# prepend the unicode chracter `\u01` + `"%02x % index` before every character to ensure unique indices
 	split("\n").map { |line| line.chars.each_with_index.map { eval("\"\\u01%02x\""%_2) + _1 }.join }.join("\n")
 	.gsub!(%r{\
 (?<=$|\n)(?<a>.*)(?<b>[^#.@])(?<c>....................................)#(?<d>.*\n)\
