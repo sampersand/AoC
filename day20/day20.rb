@@ -105,7 +105,7 @@ class String;
 \k<e>\k<b>.\k<f>.\k<g>.\k<h>.\k<i>.\k<j>.\k<k>.\k<l>.\k<m>
 \k<n>\k<b>\k<o>.\k<p>.\k<q>.\k<r>.\k<s>.\k<t>.
 EOS
-)&.gsub(/[^.\n#]/,'')&.then { _1.monsters || _1 }
+)&.tap { _1.display } &.gsub(/[^.\n#]/,'')&.then { _1.monsters || _1 }
 end end
 
 print "Part 2: "
