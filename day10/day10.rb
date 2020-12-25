@@ -13,7 +13,7 @@ LINES
 	.reduce(&:*)                   # get the product
 	.tap { puts "Part 1: #{_1}"}   # print it out
 
-def part2(curr=0, lines=LINES, memo = { lines.max => 1 })
+def part2(curr=0, lines=LINES, memo={ lines.max => 1 })
 	memo[curr] ||=
 		lines
 			.take_while { _1 - curr <= 3 }
