@@ -41,7 +41,8 @@ Tile = Struct.new :name, :board do
 	end
 end
 
-$/="" # paragraph mode!
+# Parse tiles from the input file
+$/ = "" # paragraph mode!
 
 TILES =
 	open("day20.txt").map(&:chomp).map { |paragraph|
@@ -50,9 +51,8 @@ TILES =
 		Tile.new name[/\d+/].to_i, lines.map(&:chars)
 	}.to_set
 
-
+# Construct the grid of tiles and their neighbors.
 NEIGHBORS = {}
-
 def make_grid(tile, z=0)
 	return if NEIGHBORS[z]
 	NEIGHBORS[z] = tile
@@ -64,39 +64,48 @@ def make_grid(tile, z=0)
 	nbrs[3]&.tap { make_grid _1, z - 8  }
 end
 
-make_grid TILES.first.tap(&:init_perm!)
+make_grid TILES.first.tap(&:init_perm!) # we have to chose one of them as a starting point.
 
-board = Set.new
+# Create a set of only elements present within the board.
+BOARD =
+	NEIGHBORS.flat_map do |tilecoord, tile|
+		inner = tile.inner
 
-NEIGHBORS.each do |tilecoord, tile|
-	tile.inner.each_with_index do |row, y|
-		row.each_with_index do |ele, x|
-			board.add tilecoord + x + y.i if ele == '#'
-		end
-	end
-end
+		8.times.to_a.product(8.times.to_a)
+			.filter_map { |x, y| inner[y][x] == '#' and tilecoord + x + y.i }
+	end.to_set
 
-
+# The offsets that monsters can be at
 MONSTER = [
                                                                18-1i, 
 0+0i,        5+0i, 6+0i, 	       11+0i, 12+0i,          17+0i, 18+0i, 19+0i,
   1+1i,    4+1i,      7+1i,    10+1i,      13+1i,    16+1i,
 ]
 
+# For all the different rotations/translations of `MONSTER`, delete sea monsters in the first
+# permutation that matches.
 8.times do |perm|
 	monster_mask = MONSTER.map { _1.send(perm >= 4 ? :conj : :itself) * 1i ** perm }
 
-	board.each do |z|
+	found = false
+	BOARD.each do |z|
 		coords = monster_mask.map { z + _1 }
-		coords.all? { board.include? _1 } and coords.each { board.delete _1 }
+		next unless coords.all? { BOARD.include? _1 }
+
+		coords.each { BOARD.delete _1 }
+		found = true
 	end
+
+	break if found
 end
 
+# Get the corners
 part1 =
 	NEIGHBORS.keys.map(&:real).minmax
 		.product(NEIGHBORS.keys.map(&:imag).minmax)
 		.map { NEIGHBORS[_1 + _2.i].name }
 		.reduce(&:*)
 
+# Print the results.
 puts "Part 1: #{part1}"
-puts "Part 2: #{board.length}"
+puts "Part 2: #{BOARD.length}"
