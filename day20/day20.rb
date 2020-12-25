@@ -78,7 +78,7 @@ BOARD =
 # The offsets that monsters can be at
 MONSTER = [
                                                                18-1i, 
-0+0i,        5+0i, 6+0i, 	       11+0i, 12+0i,          17+0i, 18+0i, 19+0i,
+0+0i,        5+0i, 6+0i,         11+0i, 12+0i,          17+0i, 18+0i, 19+0i,
   1+1i,    4+1i,      7+1i,    10+1i,      13+1i,    16+1i,
 ]
 
