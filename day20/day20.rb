@@ -7,18 +7,14 @@ class Array
 	def w; map(&:first) end
 end
 
-class Tile #< Array
-	attr_reader :name, :board
-
-	def initialize(name, board) @name, @board = name, board end
-
+Tile = Struct.new :name, :board do
 	def init_perm!
 		@permutation = permutations.first
 	end
 
 	def permutations
 		@permutations ||=
-			[@board, @board.transpose]
+			[board, board.transpose]
 				.flat_map { [_1, _1.reverse, _1.map(&:reverse), _1.reverse.map(&:reverse)] }
 	end
 
@@ -32,7 +28,7 @@ class Tile #< Array
 
 	def neighbors
 		@neighbors ||= begin
-			t = $tiles.-([self])
+			t = TILES.-([self])
 			[t.find { _1.permute(@permutation.n, :s) },
 			 t.find { _1.permute(@permutation.s, :n) },
 			 t.find { _1.permute(@permutation.e, :w) },
@@ -45,34 +41,34 @@ class Tile #< Array
 	end
 end
 
-$/=""
+$/="" # paragraph mode!
 
-$tiles=Set.new
+TILES =
+	open("day20.txt").map(&:chomp).map { |paragraph|
+		name, *lines = paragraph.split("\n")
 
-open("day20.txt").map(&:chomp).each do |l|
-	name, *lines = l.split("\n")
-	$tiles.add Tile.new(name[/\d+/].to_i, lines.map(&:chars))
-end
+		Tile.new name[/\d+/].to_i, lines.map(&:chars)
+	}.to_set
 
-$/="\n"
 
-def make_grid(tile, neighbors, z=0)
-	neighbors[z] || !tile and return
-	neighbors[z] = tile
+NEIGHBORS = {}
+
+def make_grid(tile, z=0)
+	return if NEIGHBORS[z]
+	NEIGHBORS[z] = tile
 	nbrs = tile.neighbors
 
-
-	make_grid nbrs[0], neighbors, z + 8
-	make_grid nbrs[1], neighbors, z - 8
-	make_grid nbrs[2], neighbors, z + 8i
-	make_grid nbrs[3], neighbors, z - 8i
+	nbrs[0]&.tap { make_grid _1, z - 8i }
+	nbrs[1]&.tap { make_grid _1, z + 8i }
+	nbrs[2]&.tap { make_grid _1, z + 8  }
+	nbrs[3]&.tap { make_grid _1, z - 8  }
 end
 
-make_grid $tiles.first.tap(&:init_perm!), neighbors = {}
+make_grid TILES.first.tap(&:init_perm!)
 
 board = Set.new
 
-neighbors.each do |tilecoord, tile|
+NEIGHBORS.each do |tilecoord, tile|
 	tile.inner.each_with_index do |row, y|
 		row.each_with_index do |ele, x|
 			board.add tilecoord + x + y.i if ele == '#'
@@ -97,9 +93,9 @@ MONSTER = [
 end
 
 part1 =
-	neighbors.keys.map(&:real).minmax
-		.product(neighbors.keys.map(&:imag).minmax)
-		.map { neighbors[_1 + _2.i].name }
+	NEIGHBORS.keys.map(&:real).minmax
+		.product(NEIGHBORS.keys.map(&:imag).minmax)
+		.map { NEIGHBORS[_1 + _2.i].name }
 		.reduce(&:*)
 
 puts "Part 1: #{part1}"

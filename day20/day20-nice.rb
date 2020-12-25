@@ -19,7 +19,9 @@ class Tile #< Array
 	def permutations
 		@permutations ||=
 			[@board, @board.transpose]
-				.flat_map { [_1, _1.reverse, _1.map(&:reverse), _1.reverse.map(&:reverse)] }
+				.flat_map { 
+					[_1, _1.reverse, _1.map(&:reverse), _1.reverse.map(&:reverse)]
+				}
 	end
 
 	def inner
@@ -56,26 +58,25 @@ end
 
 $/="\n"
 
-def make_grid(tile, neighbors, z=0)
-	neighbors[z] || !tile and return
-	neighbors[z] = tile
+def make_grid(tile, neighbors, x=0, y=0)
+	neighbors[[x, y]] || !tile and return
+	neighbors[[x, y]] = tile
 	nbrs = tile.neighbors
 
-
-	make_grid nbrs[0], neighbors, z + 8
-	make_grid nbrs[1], neighbors, z - 8
-	make_grid nbrs[2], neighbors, z + 8i
-	make_grid nbrs[3], neighbors, z - 8i
+	make_grid nbrs[0], neighbors, x, y-8
+	make_grid nbrs[1], neighbors, x, y+8
+	make_grid nbrs[2], neighbors, x+8, y
+	make_grid nbrs[3], neighbors, x-8, y
 end
 
 make_grid $tiles.first.tap(&:init_perm!), neighbors = {}
 
 board = Set.new
 
-neighbors.each do |tilecoord, tile|
-	tile.inner.each_with_index do |row, y|
-		row.each_with_index do |ele, x|
-			board.add tilecoord + x + y.i if ele == '#'
+neighbors.each do |(tx, ty), tile|
+	tile.inner.each_with_index do |row, ey|
+		row.each_with_index do |ele, ex|
+			board.add ex + tx + (ey + ty).i if ele == '#'
 		end
 	end
 end
@@ -97,9 +98,9 @@ MONSTER = [
 end
 
 part1 =
-	neighbors.keys.map(&:real).minmax
-		.product(neighbors.keys.map(&:imag).minmax)
-		.map { neighbors[_1 + _2.i].name }
+	neighbors.keys.map(&:first).minmax
+		.product(neighbors.keys.map(&:last).minmax)
+		.map { neighbors[_1].name }
 		.reduce(&:*)
 
 puts "Part 1: #{part1}"
