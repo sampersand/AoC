@@ -10,4 +10,4 @@ rules=gets("\n\n")
 	.gsub(/\z/,')?\A\g<x0>\Z')
 	.then { Regexp.new _1 }
 
-ARGF.count { rules =~ _1 }.tap(&:display)
+ARGF.count { rules =~ _1 }.display

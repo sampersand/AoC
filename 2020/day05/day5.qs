@@ -1,13 +1,13 @@
 #### These will eventually be implemented in the std lib:
 
 # Min and max
-List.min = self -> { self.fold { ifl (_0 < _1, _0, _1) } };
-List.max = self -> { self.fold { ifl (_0 > _1, _0, _1) } };
+List.min = self -> { self.reduce { ifl (_0 < _1, _0, _1) } };
+List.max = self -> { self.reduce { ifl (_0 > _1, _0, _1) } };
 
 #### ACTUAL SOLUTION STARTS HERE
 xs = Io.File('day5.txt')
 	.lines()
-	.reject(Text::empty?)
+	.reject(~$empty?)
 	.map(line -> { line.gsub(/[FL]/, '0').gsub(/[BR]/, '1').@num(2) })
 	.@list();
 
