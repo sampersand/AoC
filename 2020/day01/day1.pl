@@ -1,17 +1,17 @@
 # Day 1, in perl.
 # We had to help with expense reports
-open STDIN, "day1.txt";
 use v5.10;
+open STDIN,'day1.txt'; # Omit if reading from stdin
 
-       #              #
+       L              ;
      for$l          (<>){
    for$L(@l)      {($L+$l==
   ($q  =  202    *10  )  )&&
-  p($  L         *$l  )
+  L($  L         *$l  )
     ;($_           +$l+
        $L==           $q)?
-       p  ($_         *  $l*
+       L  ($_         *  $l*
   $L)  &  (@l    =()  )  :00
-   for@l}sub      p{say@_};
+   for@l}sub      L{say@_};
      push@          l,$l;
-       }              #
+       }              L
