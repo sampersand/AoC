@@ -1,3 +1,6 @@
+# Day 1: We needed to gauge depths in a submarine.
+# Put input in a file named `day1.txt`
+
                 open(
                 ?d+
               'ay1.t'\
