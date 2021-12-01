@@ -2,11 +2,8 @@ module Main where
 import System.IO  
 import Control.Monad
 
--- main = putStrLn "Hello World"
-
 readLines :: String -> IO [String]
 readLines file = lines <$> readFile file
-
 
 part1 :: [Int] -> Int
 part1 ns = length $ filter (\(a, b) -> a < b) $ zip ns (tail ns)
