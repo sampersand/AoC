@@ -1,0 +1,19 @@
+; = data ` "cat day2.txt"
+; = horiz = depth2 = aim 0 # aim doubles as depth1
+; WHILE data
+  ; = kind GET data 0 1
+    IF ? kind 'f'
+    ; = n + 0 GET data 8 1
+    ; = data SUB data 0 10 ""
+    ; = horiz + horiz n
+    : = depth2 + depth2 * aim n
+  #ELSE
+    ; IF ? kind 'u'
+      ; = n - 0 GET data 3 1
+      : = data SUB data 0 5 ""
+    #ELSE
+      ; = n + 0 GET data 5 1
+      : = data SUB data 0 7 ""
+    : = aim + aim n
+; OUTPUT + "part1: " * horiz aim
+: OUTPUT + "part2: " * horiz depth2

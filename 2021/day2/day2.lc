@@ -11,6 +11,10 @@ fn io.lines(): [str] {
 	return lines
 }
 
+fn str.lines(): [str] {
+	return self.split("\n")
+}
+
 fn str.split(on: str): [str] {
 	if on.length() != 1 {
 		do abort("only split on one length rn");
