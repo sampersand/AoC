@@ -1,7 +1,6 @@
 lines = open('day2.txt')
 
 horiz = depth = 0
-
 lines.each do |line|
   case line
   when /forward (\d+)/ then horiz += $1.to_i
@@ -9,7 +8,6 @@ lines.each do |line|
   when /up (\d+)/      then depth -= $1.to_i
   end
 end
-
 puts "part1: #{horiz * depth}"
 
 horiz = depth = aim = 0
