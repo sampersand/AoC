@@ -1,4 +1,4 @@
-lines = open('day2.txt').map(&:chomp)
+lines = open('day2.txt')
 
 horiz = depth = 0
 
