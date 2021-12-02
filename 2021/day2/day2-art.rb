@@ -1,3 +1,6 @@
+# Day 2: We're still in a submarine,
+# so let's draw a fishie.
+
               a=
 h=       d1=d2=0;open(
 "da"  "y2.txt").each{|l|
