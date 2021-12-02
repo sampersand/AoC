@@ -1,0 +1,111 @@
+fn io.lines(): [str] {
+	let lines = [""]
+	do lines.delete(0)
+
+	loop {
+		let line = self.readline()
+		if line == "" { break }
+		set lines = lines + [line.substr(0, line.length() - 1)]
+	}
+
+	return lines
+}
+
+fn str.split(on: str): [str] {
+	if on.length() != 1 {
+		do abort("only split on one length rn");
+	}
+
+	let acc = [""]
+	let i = 0
+
+	while i < self.length() {
+		let chr = self[i]
+
+		if chr == on {
+			set acc = acc + [""]
+		} else {
+			set acc[acc.length() - 1] = acc[acc.length() - 1] + chr
+		}
+
+		set i = i + 1
+	}
+
+	return acc
+}
+
+struct Submarine {
+	horiz: num,
+	depth: num,
+	aim: num
+}
+
+enum Direction {
+	Forward: num,
+	Up: num,
+	Down: num
+}
+
+fn Direction_from(line: str): Direction {
+	let parts = line.split(' ')
+	let which = parts[0][0]
+	let num = parts[1].to_num()
+
+	if which == 'f' {
+		return Direction::Forward { _: num }
+	}
+
+	if which == 'u' {
+		return Direction::Up { _: num }
+	}
+
+	if which == 'd' {
+		return Direction::Down { _: num }
+	}
+
+	do abort("invalid which: " + which)
+}
+
+fn Direction.move1(sub: Submarine) {
+	switch self {
+		case f: Direction::Forward { set sub.horiz = sub.horiz + f._; }
+		case d: Direction::Down { set sub.depth = sub.depth + d._; }
+		case u: Direction::Up { set sub.depth = sub.depth - u._; }
+	}
+}
+
+fn Direction.move2(sub: Submarine) {
+	switch self {
+		case f: Direction::Forward {
+			set sub.horiz = sub.horiz + f._
+			set sub.depth = sub.depth + sub.aim * f._
+		}
+		case d: Direction::Down { set sub.aim = sub.aim + d._; }
+		case u: Direction::Up { set sub.aim = sub.aim - u._; }
+	}
+}
+
+fn Submarine.position(): num {
+	return self.horiz * self.depth
+}
+
+fn main(): num {
+	let lines = io_open("day2.txt", "r").lines()
+
+	let sub1: Submarine = Submarine{horiz: 0, depth: 0}
+	let sub2: Submarine = Submarine{horiz: 0, depth: 0, aim: 0}
+
+	let i = 0
+	while i < lines.length() {
+		let dir = Direction_from(lines[i])
+		do dir.move1(sub1)
+		do dir.move2(sub2)
+		set i = i + 1
+	}
+
+	do print("part1: " + sub1.position().to_str() + "\n")
+	do print("part2: " + sub2.position().to_str() + "\n")
+
+	return 0;
+}
+
