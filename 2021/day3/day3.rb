@@ -3,10 +3,10 @@ class Array
   defined? tally or def tally; each_with_object(Hash.new 0){|k,h|h[k]+=1} end
 end
 
-data = open('day3.txt').map(&:chomp).map(&:chars)
+data = open('day3.txt').map { _1.chomp.chars }
 part1 = data
   .transpose
-  .map { |x| x.sort[x.length/2] }
+  .map { _1.sort[_1.length/2] }
   .join
 
 # not '* ~n.to_i(2)' bc infinite precision
@@ -19,7 +19,7 @@ def reduce!(ary, index, method)
     .values_at('0', '1')
     .reduce(&method) ? '0' : '1'
 
-  ary.select! { |x| x[index] == select }
+  ary.select! { _1[index] == select }
 end
 
 data1=data.dup
