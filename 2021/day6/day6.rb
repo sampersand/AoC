@@ -15,5 +15,3 @@ end
 
 puts solve 80
 puts solve 256
-
-BEGIN { class Array; def tally; each_with_object(Hash.new 0) { |k,h| h[k] += 1} end end }
