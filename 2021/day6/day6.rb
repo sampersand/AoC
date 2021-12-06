@@ -10,7 +10,7 @@ def solve(times)
     map[6] += extra
   end
 
-  map.sum(&:last)
+  map.values.sum
 end
 
 puts solve 80
