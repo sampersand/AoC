@@ -11,7 +11,7 @@ def adj(z)
 end
 
 def basins(x, found={})
-  found[x] = true or return # return if it already exists
+  found[x] = true # add `x` to the list of found basins
   adj(x).reject(&found).each { basins _1, found }
   found.length
 end
