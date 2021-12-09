@@ -1,3 +1,4 @@
+# Day 7: We had to avoid a whale by followign crabmarines
 $stdin = open('day7.txt') # omit if reading from stdin
 
 
@@ -11,11 +12,3 @@ $stdin = open('day7.txt') # omit if reading from stdin
         .min;puts"part1:#{A}";puts"pa
           rt  :#{B}".gsub(/\s+/,"");
        ?/
-
-#a= G.map(&:sum).min
-#b= G.map{|g|g.sum{|_1|_1*(_1+1)/2}}.min
-
-raise unless A == 344535
-raise unless B == 95581659
-
-
