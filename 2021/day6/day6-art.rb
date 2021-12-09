@@ -9,5 +9,3 @@ $<           .gets
   delete(-1)||0;m[8]=e};m.sum{_1[~
  0]}};    p [S[      80],S[2\
 **8     ]];
-
-BEGIN { class Array; def tally; each_with_object(Hash.new 0) { |k,h| h[k] += 1} end end }
