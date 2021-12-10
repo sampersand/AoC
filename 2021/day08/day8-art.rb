@@ -1,4 +1,4 @@
-# Day 8: we had to read digits off segmented displays
+# Day 8: we had to read digits off 7-segmented displays
 $stdin=open('day8.txt') # omit if reading from stdin
 
 require'set';M=->a,&b{a.map &b};i=M[$<]{|x|l,o=*M[x.chomp.split ?|]{|x|M[

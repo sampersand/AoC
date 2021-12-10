@@ -1,0 +1,82 @@
+fn str.is_empty(): bool {
+	return self.len() == 0
+}
+
+fn io.lines(): [str] {
+	let lines: [str] = [""]
+	do lines.delete(0)
+
+	loop {
+		let line = self.readline()
+		if line == "" { break }
+		set lines = lines + [line.substr(0, line.len() - 1)]
+	}
+
+	return lines
+}
+
+fn str.lines(): [str] {
+	return self.split("\n")
+}
+
+fn str.ends_with(s: str): bool {
+	return s == self.substr(self.len() - s.len(), s.len())
+}
+
+fn str._split_multiple(on: str): [str] {
+	let acc = [""]
+	let i = 0
+	let on_len = on.len()
+	let self_len = self.len()
+
+	while (i + on_len) < self_len {
+		let sub = self.substr(i, on_len)
+
+		if sub == on {
+			set acc = acc + [""]
+			set i = i + on_len
+		} else {
+			set acc[acc.len() - 1] = acc[acc.len() - 1] + self[i]
+			set i = i + 1
+		}
+	}
+
+	if self.ends_with(on) {
+		set acc = acc + [""]
+	} else {
+		let last = self.substr(i, self_len - i)
+
+		if last != on {
+			set acc[acc.len() - 1] = acc[acc.len() -1] + last
+		}
+	}
+
+	return acc
+}
+
+fn str.split(on: str): [str] {
+	if self.is_empty() {
+		return [""]
+	}
+
+	if on.len() != 1 {
+		return self._split_multiple(on)
+	}
+
+	let acc = [""]
+	let i = 0
+
+	while i < self.len() {
+		let chr = self[i]
+
+		if chr == on {
+			set acc = acc + [""]
+		} else {
+			set acc[acc.len() - 1] = acc[acc.len() - 1] + chr
+		}
+
+		set i = i + 1
+	}
+
+	return acc
+}

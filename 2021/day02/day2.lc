@@ -1,42 +1,4 @@
-fn io.lines(): [str] {
-	let lines = [""]
-	do lines.delete(0)
-
-	loop {
-		let line = self.readline()
-		if line == "" { break }
-		set lines = lines + [line.substr(0, line.length() - 1)]
-	}
-
-	return lines
-}
-
-fn str.lines(): [str] {
-	return self.split("\n")
-}
-
-fn str.split(on: str): [str] {
-	if on.length() != 1 {
-		do abort("only split on one length rn");
-	}
-
-	let acc = [""]
-	let i = 0
-
-	while i < self.length() {
-		let chr = self[i]
-
-		if chr == on {
-			set acc = acc + [""]
-		} else {
-			set acc[acc.length() - 1] = acc[acc.length() - 1] + chr
-		}
-
-		set i = i + 1
-	}
-
-	return acc
-}
+import "../shared.lc"
 
 struct Submarine {
 	horiz: num,
@@ -100,15 +62,15 @@ fn main(): num {
 	let sub2: Submarine = Submarine{horiz: 0, depth: 0, aim: 0}
 
 	let i = 0
-	while i < lines.length() {
+	while i < lines.len() {
 		let dir = Direction_from(lines[i])
 		do sub1.move1(dir)
 		do sub2.move2(dir)
 		set i = i + 1
 	}
 
-	do print("part1: " + sub1.position().to_str() + "\n")
-	do print("part2: " + sub2.position().to_str() + "\n")
+	do println("part1: " + sub1.position().to_str())
+	do println("part2: " + sub2.position().to_str())
 
 	return 0;
 }

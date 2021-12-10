@@ -1,0 +1,70 @@
+import "../shared.lc"
+
+struct Point { x: num, y: num }
+struct Line { tl: Point, br: Point }
+
+fn Point_parse(inp: str): Point {
+	let v = inp.split(',')
+
+	return Point { x: v[0].to_num(), y: v[1].to_num() }
+}
+
+fn Line_parse(inp: str): Line {
+	let l = inp.split("->")
+
+	return Line { tl: Point_parse(l[0]), br: Point_parse(l[1]) }
+}
+
+
+fn parse(input: [str]): [Line] {
+	let lines: [Line] = []
+	return lines
+
+	let i = 0
+	while i < input.len() {
+		do lines.push(Line_parse(input[i]))
+		set i = i + 1
+	}
+
+	return lines
+}
+
+fn solve(part1: bool, lines: [Line]): num {
+	let map: {str:num} = {}
+	set map["A"] = 3
+	return 0
+}
+
+fn main(): num {
+	let lines = parse(io_open("day5.txt", "r").lines())
+
+	do println("part 1: " + solve(true, lines).to_str())
+	do println("part 2: " + solve(false, lines).to_str())
+
+	return 0
+}
+
+
+/*
+$stdin=open 'day5.txt'
+
+def solve(part1)
+  map = Hash.new 0
+
+  LINES.each do |(tl, br)|
+    dir = (br.real<=>tl.real) + (br.imag<=>tl.imag).i
+
+    if part1 && !(br.real==tl.real || br.imag == tl.imag)
+      next
+    end
+
+    map[tl] += 1
+    map[tl += dir] += 1 until tl == br
+  end
+
+  map.values.count { 2 <= _1 }
+end
+
+puts "part 1: #{solve true}"
+puts "part 1: #{solve false}"
+*/

@@ -1,0 +1,21 @@
+; = readline BLOCK
+	; = line + 0 data
+	; = data SET data 0 (+ 1 LENGTH + "" line) ""
+	: line
+
+; = data ` "cat day1.txt"
+; = a CALL readline
+; = b CALL readline
+; = c CALL readline
+; = acc1 ++ 0 < a b < b c
+; = acc2 0
+
+; WHILE data
+	; = d CALL readline
+	; & (< c d) = acc1 + 1 acc1
+	; & (< a d) = acc2 + 1 acc2
+	; = a b
+	; = b c
+	: = c d
+; OUTPUT + "part1: " acc1
+: OUTPUT + "part2: " acc2
