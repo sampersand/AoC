@@ -28,9 +28,9 @@ sum = 0
   sum += GRID.transform_values! { _1 || 0 }.values.count(&:zero?)
   
   if gen == 100
-    puts "part1: #{sum}" 
+    puts "part1: #{sum}"
   elsif GRID.values.uniq == [0]
-    puts "part2: #{gen}" 
+    puts "part2: #{gen}"
     break
   end
 end
