@@ -1,13 +1,17 @@
+# Day 10: We had to match braces properly
 $stdin=open('day10.txt')
 
-o=0;t=[]
-$<.map{|l|
-  0while l.gsub! /\[\]|\(\)|\{\}|<>|\n/,''
-  l=~/[\])}>]/?
-    # o+={?)=>3,?]=>57,?}=>1197,?>=>25137}[$&]:
-    o+={**[[?),3],[?],57],[?},1197],[?>,25137]]}[$&]:
-    t<<(s=0;l.reverse.chars{|c|s=s*5+1+(c=~/[(\[{<]/)};s)
-}
+             o=00;     t=[   ];$<.   map{|   l|;     ;x=[*
+     0..    999       ];;    for       xyz    in(       x);   ;a\
+   =l.      sub     %r@      \[A       ?\]      |\(     \)|     \{a
+  ?\}       |<>     |\n      @x,       %@@      ;if     a==      l;0
+ x[0       ..-     1]=       [];       end       ;l=     +a;      end
+l=~      /[\])     }>]       /x?       o+=       {?)     =>3,+     ?]\
+ =>3       *19     ,?}       =>+       19*       63,     -?>      =>+  
+  441       *57     }[-      $&]       :t.      <<(     (q=      ->\
+   s,i      {l[     ~i]      ?q[       s*5      +('     +([     {<'.
+    tr(     ?\s      ,""     )=~       /#{     ?\\      +l[    ~i]
+     }/)    ,i+       1]:    s};       )[0    ,0]       )};   a=t.
+             sort[     +t.   size/   2];p(   ;[o     ,a]);
 
-puts o
-puts t.sort[t.size/2]
+# oops, i mesed this up and added an extra row, and tried to fix it.
