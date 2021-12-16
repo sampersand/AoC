@@ -41,11 +41,9 @@ def decode(packet)
   end
 end
 
-$stdin=open('day16.txt')
-input = (x=gets).chars.map { "%04b" % _1.hex }.join
-p x.chomp.to_i(16).to_s(16) == x
-# p input.to_i(2)
-# p p(input.to_i(16)) == x.chomp
+$stdin = open('day16.txt')
+input = gets.chars.map { "%04b" % _1.hex }.join
+
 puts decode input.dup
 $part2 = true
 puts decode input
