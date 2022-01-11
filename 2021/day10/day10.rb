@@ -5,7 +5,7 @@ part2 = []
 
 $stdin.each_line do |line|
   line.chomp! # delete trailing newline
-  nil while line.gsub! /\[\]|\(\)|\{\}|<>|\n/, '' # strip all matching pairs
+  nil while line.gsub! /\[\]|\(\)|\{\}|<>/, '' # strip all matching pairs
 
   if line =~ /[\])}>]/
     # if we have a corrupt line, then add it to part1
