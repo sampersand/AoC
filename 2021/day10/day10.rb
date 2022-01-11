@@ -3,7 +3,7 @@ $stdin = open('day10.txt')
 part1 = 0
 part2 = []
 
-while (line = gets)
+$stdin.each_line do |line|
   line.chomp! # delete trailing newline
   nil while line.gsub! /\[\]|\(\)|\{\}|<>|\n/, '' # strip all matching pairs
 
