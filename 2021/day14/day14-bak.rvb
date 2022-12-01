@@ -1,61 +1,34 @@
 $stdin = open('day14.txt')
-# $stdin = DATA
 
-start = gets.chomp
-pol = {}
-$stdin.each_line do |line|
-  line =~ /\s->\s/ or next
-  pol[$`] = $'.chomp
-end
+START = gets.chomp
+gets # delete the empty line
+XFORMS = $stdin.map { _1.chomp.split ' -> ' }.to_h
 
-groups = start.chars.each_cons(2).map(&:join).tally
-40.times do
-  newg = Hash.new 0
-  last = nil
-  groups.each do |g, c|
-    if (x=pol[g])
-      newg[g[0]+x] += c
-      newg[x+g[1]] += c
-    else
-      newg[g] += c
-    end
+def solve(amnt)
+  groups = START.chars.each_cons(2).map(&:join).tally
+
+  amnt.times do
+    groups.replace groups.each_with_object(Hash.new 0){ |(g, c), h|
+      if (x=XFORMS[g])
+        h[g[0]+x] += c
+        h[x+g[1]] += c
+      else
+        h[g] += c
+      end
+    }
   end
-  groups.replace newg
 
-  # start.length.times do |i|
-  #   s.concat start[i]
-  #   if x=pol[start[i, 2]]
-  #     s.concat x
-  #   end
-  # end
-  # start.replace s
+  counts = Hash.new 0
+  groups.each do |k, c|
+    counts[k[0]] += c
+    counts[k[1]] += c
+  end
+
+  counts[START[0]] += 1 # manually add first and last values
+  counts[START[-1]] += 1
+
+  counts.map { _2 / 2 }.minmax.reverse.reduce(&:-)
 end
-x = Hash.new 0
-groups.each { x[_1[0]] += _2; x[_1[1]] += _2; }
-x[start[0]] += 1
-x[start[-1]] += 1
-x.transform_values! { _1 / 2 }
-# p groups.sort_by(&:last)
-p x.sort_by(&:last)
-# puts s
 
-
-__END__
-NNCB
-
-CH -> B
-HH -> N
-CB -> H
-NH -> C
-HB -> C
-HC -> B
-HN -> C
-NN -> C
-BH -> H
-NC -> B
-NB -> B
-BN -> B
-BB -> N
-BC -> B
-CC -> N
-CN -> C
+puts solve 10
+puts solve 40

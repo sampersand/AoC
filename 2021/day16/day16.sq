@@ -1,0 +1,246 @@
+form Input {
+	matter text, start;
+
+	imitate(text, start = I) { soul.text = text; soul.start = start; }
+
+	change to-veracity() => soul.start <= soul.text.length;
+
+	change take(n) {
+		soul.start = soul.start + n
+		reward substr(soul.text, soul.start - n, n)
+	}
+}
+
+journey map(book, fn) {
+	acc = []
+	i = I
+	whilst i <= book.length {
+		insert(acc, i, fn(book[i]))
+		i = i + I
+	}
+	reward acc
+}
+
+journey reduce(book, init, fn) {
+	i = I
+	whilst i < book.length {
+		init = fn(init, book[i = i + I])
+	}
+	reward init
+}
+
+journey from-hex(input) {
+	acc = ''
+	i = I
+	whilst i < input.length {
+		fork input[i] {
+			path '0': acc = acc + '0000'
+			path '1': acc = acc + '0001'
+			path '2': acc = acc + '0010'
+			path '3': acc = acc + '0011'
+			path '4': acc = acc + '0100'
+			path '5': acc = acc + '0101'
+			path '6': acc = acc + '0110'
+			path '7': acc = acc + '0111'
+			path '8': acc = acc + '1000'
+			path '9': acc = acc + '1001'
+			path 'A': acc = acc + '1010'
+			path 'B': acc = acc + '1011'
+			path 'C': acc = acc + '1100'
+			path 'D': acc = acc + '1101'
+			path 'E': acc = acc + '1110'
+			path 'F': acc = acc + '1111'
+		}
+
+		i = i + I
+	}
+	reward acc + "0"*X
+}
+
+journey from-bin(str) {
+	bin = N
+	start = I
+
+	whilst start <= str.length {
+		bin = bin * II;
+		if str[start] == '1' { bin = bin + I }
+		start = start + I
+	}
+
+	reward bin
+}
+
+form Packet {
+	matter ver, kind, data;
+
+	recall parse(input) {
+		ver = from-bin(input.take(III))
+		kind = from-bin(input.take(III))
+
+		if kind == IV {
+			acc = ""
+
+			whilst (tmp = input.take(V))[I] == '1' {
+				acc = acc + substr(tmp, II, V)
+			}
+			acc = acc + substr(tmp, II, V)
+
+			reward Packet(ver, kind, from-bin(acc))
+		}
+
+		sub = []
+		if input.take(I) == '0' {
+			packet = Input(input.take(from-bin(input.take(XV))))
+
+			whilst packet {
+				insert(sub, sub.length+I, Packet.parse(packet))
+			}
+		} alas {
+			i = from-bin(input.take(XI))
+			whilst i {
+				insert(sub, sub.length+I, Packet.parse(input))
+				i = i - I
+			}
+		}
+
+		reward Packet(ver, kind, sub)
+	}
+
+	change part1
+		() if soul.kind == 4 => soul.ver,
+		() => reduce(soul.data, soul.ver, \(a,b) => a+b.ver);
+
+}
+
+p = Packet.parse(Input(from-hex('E20D79005573F71DA0054E48527EF97D3004653BB1FC006867A8B1371AC49C801039171941340066E6B99A6A58B8110088BA008CE6F7893D4E6F7893DCDCFDB9D6CBC4026FE8026200DC7D84B1C00010A89507E3CCEE37B592014D3C01491B6697A83CB4F59E5E7FFA5CC66D4BC6F05D3004E6BB742B004E7E6B3375A46CF91D8C027911797589E17920F4009BE72DA8D2E4523DCEE86A8018C4AD3C7F2D2D02C5B9FF53366E3004658DB0012A963891D168801D08480485B005C0010A883116308002171AA24C679E0394EB898023331E60AB401294D98CA6CD8C01D9B349E0A99363003E655D40289CBDBB2F55D25E53ECAF14D9ABBB4CC726F038C011B0044401987D0BE0C00021B04E2546499DE824C015B004A7755B570013F2DD8627C65C02186F2996E9CCD04E5718C5CBCC016B004A4F61B27B0D9B8633F9344D57B0C1D3805537ADFA21F231C6EC9F3D3089FF7CD25E5941200C96801F191C77091238EE13A704A7CCC802B3B00567F192296259ABD9C400282915B9F6E98879823046C0010C626C966A19351EE27DE86C8E6968F2BE3D2008EE540FC01196989CD9410055725480D60025737BA1547D700727B9A89B444971830070401F8D70BA3B8803F16A3FC2D00043621C3B8A733C8BD880212BCDEE9D34929164D5CB08032594E5E1D25C0055E5B771E966783240220CD19E802E200F4588450BC401A8FB14E0A1805B36F3243B2833247536B70BDC00A60348880C7730039400B402A91009F650028C00E2020918077610021C00C1002D80512601188803B4000C148025010036727EE5AD6B445CC011E00B825E14F4BBF5F97853D2EFD6256F8FFE9F3B001420C01A88915E259002191EE2F4392004323E44A8B4C0069CEF34D304C001AB94379D149BD904507004A6D466B618402477802E200D47383719C0010F8A507A294CC9C90024A967C9995EE2933BA840')))
+#dump(p) # .part1())
+dump(p.part1())
+@__END__
+form Packet {
+	matter data, start, len;
+
+	imitate(data, start=I, len=data.length) {
+		soul.data = data
+		soul.start = start
+		soul.len = len
+	}
+
+	change to-str() => substr(soul.data, soul.start, soul.len - soul.start - I)
+	change [](idx) => soul.data[idx + start]
+
+	change bin() {
+		bin = N
+		start = I
+
+		whilst start <= soul.len {
+			bin = bin * II;
+			if soul[start] == '1' { bin = bin + I }
+			start = start + I
+		}
+
+		reward bin
+	}
+
+	change take(n) =>
+		Packet(s: self.s)
+  set self.start = self.start + n
+  let p = packet { s: self.s, start: self.start - n, len: n }
+  return p
+
+	}
+}
+
+p = Packet("00101", 1)
+dump(p.to-str())
+dump(p.bin())
+/*
+struct packet { s: str, start: num, len: num }
+
+fn packet.bin(): num {
+  let bin = 0
+  let start = self.start
+  let len = self.len
+
+  while start < len {
+    set bin = bin * 2
+    if self.s[start] == '1' {
+      set bin = bin + 1
+    }
+    set start = start + 1
+  }
+
+  set self.start = start // for efficiency, use a local variable
+
+  return bin
+}
+
+fn packet.dump(): str {
+  return self.s.substr(self.start, self.len - self.start)
+}
+
+fn packet.take(n: num): packet {
+  set self.start = self.start + n
+  let p = packet { s: self.s, start: self.start - n, len: n }
+  return p
+}
+
+fn main(): num {
+  let p: packet = packet { s: "1110" }
+  do println(p.take(1).dump())
+  do println(p.dump())
+  return 0
+  //do println(p.bin().to_str())
+}
+__EOF__
+# Global leaderboard 43/28
+class String
+  def bin = to_i(2)
+  def take(n) = slice!(...n)
+end
+
+def decode(packet)
+  ver = packet.take(3).bin
+  type = packet.take(3).bin
+
+  if type == 4
+    acc = ''
+
+    while (tmp = packet.take(5)).take(1) == '1'
+      acc.concat tmp
+    end
+
+    return $part2 ? (acc + tmp).bin : ver
+  end
+
+  sub = [] 
+  if packet.take(1) == '0'
+    packet = packet.take packet.take(15).bin
+    sub.push decode packet until packet.empty?
+  else
+    packet.take(11).bin.times do
+      sub.push decode packet
+    end
+  end
+
+  return ver + sub.sum unless $part2
+
+  case type
+  when 0 then sub.sum
+  when 1 then sub.reduce(&:*)
+  when 2 then sub.min
+  when 3 then sub.max
+  when 5 then sub[0]  > sub[1] ? 1 : 0
+  when 6 then sub[0]  < sub[1] ? 1 : 0
+  when 7 then sub[0] == sub[1] ? 1 : 0
+  end
+end
+
+$stdin=open('day16.txt')
+input = (x=gets).chars.map { "%04b" % _1.hex }.join
+p x.chomp.to_i(16).to_s(16) == x
+# p input.to_i(2)
+# p p(input.to_i(16)) == x.chomp
+puts decode input.dup
+$part2 = true
+puts decode input
+*/
