@@ -11,7 +11,6 @@ module Kernel
   end
 end
 
-
 class AocProblem
   DEFAULT_SESSION_PATH = File.join __dir__, 'session'
 
