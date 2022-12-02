@@ -1,0 +1,2 @@
+findme=: {{ ({.~ <./@i:&'/\')(4!:4<'findme'){::4!:3'' }}
+raw =: freads (findme '') , '/day1.txt'
