@@ -1,35 +1,6 @@
 require_relative '../submitter'
 data = download!
 
-# p (1 - 3)%3 * 3
-# p (1 - 2)%3 * 3
-# p (1 - 1)%3 * 3
-# __END__
-# 1 1 = 3
-# 1 2 = 6
-# 1 3 = 0
-data.tr! 'ABCXYZ','123321'
-p data.each_line.map { |l|
-  x,y = l.split.map(&:to_i)
-
-  ((x - y) % 3) * 3  + y
-}.sum
-
-exit
-{
-  'A' => ''
-}
-
-p data.each_line.map(&:chomp)
-p data.each_line.map {
-  next ' ABC'.index(data[0]) + 3 if data.tr('XYZ', 'ABC').chars.uniq.length == 2
-  ans = (_1['Y'] ? 2 : _1['X'] ? 1 : 3) + (_1[{'Y'=>'A','X'=>'C','Z'=>'B'}[_1.chomp[-1]]] ? 6 : _1.chomp.gsub(' ','').tr('ABC','XYZ').chars.uniq.length == 1 ? 3 : 0)
-}.sum
-
-# 13009
-exit
-
-p data
 
 # p 'BCA'.chars.rotate(-'XYZ'.index('X')).join
 # exit

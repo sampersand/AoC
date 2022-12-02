@@ -19,7 +19,7 @@ class AocProblem
     @session = session
   end
 
-  def submit(data, part)
+  def submit(data, part=1)
     raise ArgumentError, 'need part 1 or 2' unless part == 1 || part == 2
 
     input_url = aoc_url 'answer'
