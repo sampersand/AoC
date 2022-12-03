@@ -11,4 +11,4 @@ a    ==   x.   tr(y,%\ABC   \)?3:0)+1;t  +=
 n*3+1    +i   ['BCA'.chars    .rotate(-n)
     .   *(    ''),a]};puts"
     p1:#{     o} p2:#{t}#{}
-               ".+@  .strip
+               ".+@.strip
