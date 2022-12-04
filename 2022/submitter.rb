@@ -14,13 +14,18 @@ end
 class AocProblem
   DEFAULT_SESSION_PATH = File.join __dir__, 'session'
 
-  def initialize(day, year, session: File.read(DEFAULT_SESSION_PATH).strip)
+  def initialize(day, year, session: File.read(DEFAULT_SESSION_PATH).strip)#, push: true)
     @day, @year = day.to_i, year.to_i
     @session = session
+    # @push = push
   end
 
   def submit(data, part=1)
     raise ArgumentError, 'need part 1 or 2' unless part == 1 || part == 2
+    # return :dont_push unless @push
+
+    data = data.to_s
+    puts "Submitting #{data.inspect} for part #{part}"
 
     input_url = aoc_url 'answer'
     http = Net::HTTP.new(input_url.host, 443)
@@ -28,7 +33,8 @@ class AocProblem
 
     request = Net::HTTP::Post.new(input_url.request_uri)
     set_cookie request
-    request.set_form_data Hash[level: part, answer: data.to_s]
+    request.set_form_data Hash[level: part, answer: data]
+
     loop do
       break case b = http.request(request).body
             when /You don't seem to be solving the right level/ then :already_done
@@ -49,8 +55,17 @@ class AocProblem
     force: false,
     wait: Date.new(@year, 12, @day.to_i).to_time > Time.now,
     filename: File.join(File.dirname(caller.last[/\A(.*?):/, 1]), "day#@day.txt"),
-    set_stdin: true
+    set_stdin: true,
+    lines: false
   )
+
+  # def download(
+  #   force: false,
+  #   wait: @wait && Date.new(@year, 12, @day.to_i).to_time > Time.now,
+  #   filename: File.join(caller.last[/\A.*?day\d+(?=\/.*:)/], "day#@day.txt"),
+  #   # filename: File.join(File.dirname(caller.last[/\A(.*?):/, 1]), "day#@day.txt"),
+  #   set_stdin: true
+  # )
     if wait
       puts "Going to wait #{secs = seconds_until_midnight}s before downloading"
       $stdout.flush
@@ -61,7 +76,8 @@ class AocProblem
     File.write filename, fetch_input unless File.exist? filename
 
     $data = File.read filename
-    $stdin = $data.each_line if set_stdin
+    # $stdin = $data.each_line if set_stdin
+    $data = $data.lines.map(&:chomp) if lines
     $data
   end
 
@@ -94,9 +110,11 @@ class AocProblem
   end
 end
 
+# def download!(year=Time.now.year, day=caller.last[%r{/day(\d+)/}, 1].to_i, push: true, **kw)
 def download!(year=Time.now.year, day=caller.last[/day(\d+)\.rb/, 1].to_i, **kw)
   year, day = day, year if year > day # lmao, in case i forget the order
   warn "aoc already exists, overwriting" if $aoc
+  # ($aoc = AocProblem.new(year, day, push: push)).download(**kw)
   ($aoc = AocProblem.new(year, day)).download(**kw)
 end
 
