@@ -1,5 +1,5 @@
 # Day 3. I drank a coffee to stay awake for the challenge
-$stdin = open 'day3.txt'
+$stdin = open 'input.txt'
 
               (
           r  =

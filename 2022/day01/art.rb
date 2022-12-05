@@ -1,4 +1,4 @@
-$stdin = open 'day1.txt'
+$stdin = open 'input.txt'
 
         d=
        ($/=

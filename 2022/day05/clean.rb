@@ -1,4 +1,4 @@
-$stdin = open 'day5.txt'
+$stdin = open 'input.txt'
 
 crates = $stdin
   .gets("\n\n")

@@ -1,5 +1,5 @@
 # Day 2: We had to play rock paper scissors for campsites
-$stdin = open 'day2.txt'
+$stdin = open 'input.txt'
 
                  p;i=
                ->l,     q{l.index q\

@@ -1,6 +1,6 @@
 # Day 4: Elves had to clean up their sections
+$stdin = open 'input.txt'
 
-$stdin = open 'day4.txt'
                                o=
                                t=
                                0;

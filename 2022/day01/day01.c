@@ -7,7 +7,7 @@ int cmp(int *l, int *r) {
 int main() {
 	int elves[1000], len; // big enough, yolo.
 	char buf[1000000], *ptr = buf; // also big enough lol.
-	fread(&buf, sizeof(buf), 1, fopen("day1.txt", "r"));
+	fread(&buf, sizeof(buf), 1, fopen("input.txt", "r"));
 
 	for (len = 0; *ptr; ++len) {
 		elves[len] = 0;

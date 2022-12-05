@@ -1,4 +1,5 @@
-$stdin = open 'day5.txt'
+# Day 5: we had to move boxes around with a crane.
+$stdin = open 'input.txt'
 
       t=(o=$<.gets($/*2).lines[..-3].tap{
     R=  /(  \d  +)  \s  fr  om  \s  ?(  \d
@@ -21,3 +22,5 @@ $stdin = open 'day5.txt'
                       00]}*+""}));BEGIN{
                       T=->{_1.transpose}
         P=->{_1[_2].prepend *_1[_3].shift(_4)}}
+
+

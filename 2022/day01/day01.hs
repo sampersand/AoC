@@ -8,7 +8,7 @@ splitOn sep inp@(h:rest)
    | isPrefixOf sep inp => splitOn $ drop (length sep) inp
    | otherwise => h + 
 main = do
-   raw <- readFile "day1.txt"
+   raw <- readFile "input.txt"
    let contents = splitOn "\n\n" raw
    putStr $ show contents
 -- -- main = putStrLn "Hello World"
@@ -32,7 +32,7 @@ main = do
 --    scanl' (+) 0 $ cycle list
 
 -- main = do  
---    contents <- lines <$> readFile "day1.txt"
+--    contents <- lines <$> readFile "input.txt"
 --    let contents' = (read2 <$> contents) :: [Int]
 --    putStr $ "part1: " ++ (show $ part1 contents') ++ "\n"
 --    putStr $ "part2: " ++ (show $ part2 contents') ++ "\n"

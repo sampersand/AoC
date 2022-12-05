@@ -1,6 +1,6 @@
 require_relative '../submitter'
 
-$stdin = open 'day2.txt'
+$stdin = open 'input.txt'
 
 # These are the equations you can use to solve each part.
 def part1(x, y) = (x - y + 1)%3*3 + x + 1

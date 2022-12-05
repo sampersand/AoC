@@ -113,11 +113,34 @@ end
 # def download!(year=Time.now.year, day=caller.last[%r{/day(\d+)/}, 1].to_i, push: true, **kw)
 def download!(year=Time.now.year, day=caller.last[/day(\d+)\.rb/, 1].to_i, **kw)
   year, day = day, year if year > day # lmao, in case i forget the order
+  @year, @day = year, day
   warn "aoc already exists, overwriting" if $aoc
   # ($aoc = AocProblem.new(year, day, push: push)).download(**kw)
-  ($aoc = AocProblem.new(year, day)).download(**kw)
+  @data = ($aoc = AocProblem.new(year, day)).download(**kw)
 end
 
 def submit!(...)
   puts $aoc.submit(...)
 end
+
+def testcase!(code, value, part=1)
+  (@testcase ||= [[],[]])[part] << [code, value.to_s]
+end
+
+def test! part=1
+  @testcase[part].each do |(code, expected)|
+    given = yield(code).to_s
+    if given != expected
+      puts "testcases doesn't match:\nexpected=#{expected.inspect}\n   given=#{given.inspect}"
+      exit
+    end
+  end
+end
+
+def run! part=1, &block
+  raise "need download! first" unless @data
+  test! part, &block
+  submit! block.call(@data), part
+end
+
+

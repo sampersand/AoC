@@ -1,4 +1,4 @@
- $stdin = open 'day3.txt'
+ $stdin = open 'input.txt'
 
 # Define what it means to get the priority of an item.
 def priority(item)

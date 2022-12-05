@@ -1,4 +1,4 @@
-open STDIN, 'day1.txt';
+open STDIN, 'input.txt';
 
 $/ = "";
 @x = reverse sort map { eval join $" = '+', split } <>;

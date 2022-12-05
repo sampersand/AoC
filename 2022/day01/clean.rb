@@ -1,4 +1,4 @@
-$stdin = open 'day1.txt'
+$stdin = open 'input.txt'
 
 data = $stdin.readlines("\n\n").map { |line| line.split.sum(&:to_i) }
 puts "part 1: #{data.max}"
