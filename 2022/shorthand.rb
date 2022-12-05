@@ -1,30 +1,31 @@
 module Aoc
-  refine Object do
-    def s = to_s
-    def i(...) = to_i(...)
-  end
+  # refine Object do
+  #   def s = to_s
+  #   def i(...) = to_i(...)
+  # end
 
   refine Integer do
     def hex(fmt=2) = "%0#{fmt}x" % self
     def bin(fmt=8) = "%0#{fmt}b" % self
 
-    alias each times
-    alias t times
-    include Enumerable
+    # alias each times
+    # alias t times
+    # include Enumerable
   end
 
   refine String do
-    def clines = lines.map(&:chomp)
+    # def clines = lines.map(&:chomp)
 
-    alias c chars
-    alias l lines
-    alias b bytes
+    # alias c chars
+    # alias l lines
+    # alias b bytes
 
     def bin = to_i(2)
   end
 
   refine Enumerable do
-    def e(...) = each()
+    def e(...) = each(...)
+    def m(...) = map(...)
 
     def permutation(...) = to_a.permutation(...)
     alias perm permutation
@@ -39,13 +40,16 @@ module Aoc
     end
 
     def zip2(*a)
-      return to_enum __method__, *a unless block_given?
+      # return to_enum __method__, *a unless block_given?
       vals = [self, *a].map(&:each)
+      ret = []
       loop do 
         given = vals.map { _1.next rescue nil }
         break if given.compact.empty?
-        yield given
+        # yield given
+        ret << given
       end
+      ret 
     end
   end
 end
