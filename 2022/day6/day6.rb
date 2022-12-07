@@ -3,11 +3,12 @@ $stdin = open 'day6.txt'
 LINE = gets
 
 def solve(amnt)
-  amnt + LINE.index(LINE
+  LINE
     .chars
     .each_cons(amnt)
     .find { |window| window.uniq.length == amnt }
-    .join)
+    .join
+    .then { amnt + LINE.index(_1) }
 end
 
 puts solve 4
