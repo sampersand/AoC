@@ -1,4 +1,18 @@
 module Aoc
+  refine Hash do
+    def neighbors4(pos)
+      [1, -1, 1i, -1i].map{_1 + pos}.map(&self)
+    end
+
+    def neighbors8(pos)
+      [-1+1i,  1i, 1+1i,
+       -1,         1,
+       -1-1i, -1i, 1-1i].map{_1+pos}.map(&self)
+    end
+
+    alias inc? include?
+  end
+
   # refine Object do
   #   def s = to_s
   #   def i(...) = to_i(...)
@@ -16,9 +30,9 @@ module Aoc
   refine String do
     # def clines = lines.map(&:chomp)
 
-    # alias c chars
-    # alias l lines
-    # alias b bytes
+    alias c chars
+    alias l lines
+    alias b bytes
 
     def bin = to_i(2)
   end

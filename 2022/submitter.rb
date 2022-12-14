@@ -24,7 +24,7 @@ class AocProblem
     raise ArgumentError, 'need part 1 or 2' unless part == 1 || part == 2
     # return :dont_push unless @push
 
-    data = data.to_s
+    data = data.to_s.chomp
     puts "Submitting #{data.inspect} for part #{part}"
 
     input_url = aoc_url 'answer'
@@ -38,12 +38,14 @@ class AocProblem
     loop do
       break case b = http.request(request).body
             when /You don't seem to be solving the right level/ then :already_done
+            when /You achieved\s*<em>\s*rank (\d+)/             then "Correct! You got rank #$1"
             when /That's the right answer!/                     then :correct
             when /That's not the right answer\./                then :incorrect
-            when /You have (\d+)s? left to wait/
-              puts "Oops not enough time has elapsed!. Going to wait #$1s"
+            when /You have (\d+m )?(\d+)s? left to wait/
+              time = ($1&.to_i||0)*60 + $2.to_i
+              puts "Oops not enough time has elapsed!. Going to wait #{time}s"
               $stdout.flush
-              ssleep $1.to_i
+              ssleep time.to_i
             else
               warn "unknown result: #{b}"
               :unknown
@@ -89,6 +91,7 @@ class AocProblem
 
   def set_cookie(request)
     request['Cookie'] = CGI::Cookie.new('session', @session).to_s.sub /;.*/, ''
+    request['User-agent'] = 'github.com/sampersand/aoc/2020/submitter.rb'
   end
 
   def fetch_input
