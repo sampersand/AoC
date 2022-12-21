@@ -2,7 +2,7 @@ def reduce!(monkeys)
   begin
     changed = false
     monkeys.each_value do |value|
-      value.gsub! /\b[a-z]\w*\b/ do
+      value.gsub! /\b(?!humn)[a-z]\w*\b/ do
         changed = "(#{monkeys[$&]})"
       end
     end
@@ -13,15 +13,15 @@ $stdin = open 'day21.txt'
 
 monkeys = $stdin.map { _1.gsub(/\s/, '').split ':' }.to_h
 
-part1 = monkeys.dup
-reduce! part1
-puts eval part1['root']
+# part1 = monkeys.dup
+# reduce! part1
+# puts eval part1['root']
 
-exit
 monkeys['root'].gsub!(/[-+*\/]/, '==')
 monkeys.delete 'humn'
 monkeys['humn'] = 'humn'
 reduce! monkeys
+p monkeys
 
 # eq = monkeys['root']
 # p eq
