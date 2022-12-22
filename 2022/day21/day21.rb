@@ -11,6 +11,7 @@ end
 
 $stdin = open 'day21.txt'
 
+
 monkeys = $stdin.map { _1.gsub(/\s/, '').split ':' }.to_h
 
 # part1 = monkeys.dup

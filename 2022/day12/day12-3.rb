@@ -16,18 +16,17 @@ $stdin.each_with_index do |line, x|
   end
 end
 
-def moveable(z,memo)
-  [1i,-1i,1,-1].map{z+_1}
+def moveable(position, memo)
+  [1i,-1i,1,-1].map{ position + _1}
     .reject { memo.key? _1 and _1 != $stop }
-    .select { GRID[_1] <= GRID[z]+1 rescue nil }
+    .select { GRID[_1] <= GRID[position]+1 rescue nil }
 end
 
 def traverse(position, memo={$stop=>0})
-  memo[position] ||= begin
+  memo[position] ||=
     moveable(position, memo)
       .each{memo[_1]||=nil}
-      .filter_map{ 1 + traverse(_1, memo) }.min || Float::INFINITY
-  end
+      .filter_map{ 1 + traverse(_1, memo) rescue nil }.min# || Float::INFINITY
 end
 
 p traverse start
