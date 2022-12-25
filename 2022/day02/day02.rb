@@ -1,11 +1,12 @@
-require_relative '../submitter'
-
 $stdin = open 'input.txt'
 
 # These are the equations you can use to solve each part.
 def part1(x, y) = (x - y + 1)%3*3 + x + 1
 def part2(x, y) = (x + y - 1)%3 + 3*x + 1
 
+# The fun hack here is that we do both part 1 and part2 in one swoop: Part1 is
+# the real part and part 2 is the imaginary part. We then sum them up and print
+# out the resulting total real and imaginary components.
 $stdin
   .sum { |line| # Iterate over each line, and sum the return values
     # Extract out the bytes in the line

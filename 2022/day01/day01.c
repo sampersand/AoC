@@ -15,6 +15,7 @@ int main() {
 		for (int tmp, amnt; *ptr && sscanf(ptr, "%d%n", &tmp, &amnt);) {
 			elves[len] += tmp;
 			ptr += amnt + 1;
+
 			if (*ptr == '\n')
 				break;
 		}
