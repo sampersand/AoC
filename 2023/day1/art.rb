@@ -1,5 +1,6 @@
 # Day 1, part 2: We were loaded into a trebuchet
 $stdin = open 'day1.txt' # Omit if reading from stdin
+
                                        a,k=$<
                                    .sum{  |
                                l|"#{     l[k
