@@ -1,12 +1,12 @@
-# Day 1: We were loaded into a trebuchet
+# Day 1, part 2: We were loaded into a trebuchet
 $stdin = open 'day1.txt' # Omit if reading from stdin
                                        a,k=$<
                                    .sum{  |
                                l|"#{     l[k
-                           ];a[$&        ]||
+                           ];a[$&        ]or
                       $&}#{l.
                   rindex(
-            k);a[$&]||
+            k);a[$&]or
         $&}"&.   to_i}\
     if(a=        eval'
       {          "one"
@@ -16,5 +16,5 @@ $stdin = open 'day1.txt' # Omit if reading from stdin
             ,"   five"   =>
           5,     "six"     =>
     6,"seven"=>7,"eight"=>8,"nine"
-   =>9,"zero"=>0}'.tr(" \n",''))&&
-   k=Regexp.union(/\d/,*a.keys)#S&
+   =>9,"zero"=>0}'.tr("\s\n",'');k=
+   Regexp.union /\d/,*a.keys);p(+a)
