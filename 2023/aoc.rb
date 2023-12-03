@@ -70,7 +70,11 @@ module Aoc
 
       data = data.to_s
       puts "Submitting #{data.inspect} for part #{part}"
-      parse_response submit_data! data, part
+      loop do
+        resp = parse_response submit_data! data, part
+        break unless resp == :retry
+        puts "Resubmitting..."
+      end
     end
 
     private
@@ -87,7 +91,7 @@ module Aoc
     end
 
     def parse_response(response)
-      case b = 
+      case response
       when /You don't seem to be solving the right level/ then "You've already solved this"
       when /You achieved\s*<em>\s*rank (\d+)/             then "Correct! You got rank #$1"
       when /That's the right answer!/                     then "Correct! (You didn't place...)"
@@ -96,6 +100,7 @@ module Aoc
         puts "Oops not enough time has elapsed!. Going to wait #$1s"
         $stdout.flush
         ssleep $1.to_i
+        :retry
       else
         warn "unknown result: #{b}"
         :unknown

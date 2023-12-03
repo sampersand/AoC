@@ -122,6 +122,10 @@ def download!(year=Time.now.year, day=caller.last[/day(\d+)\.rb/, 1].to_i, **kw)
   @data = ($aoc = AocProblem.new(year, day)).download(**kw)
 end
 
+def part!(n)
+  p $aoc.lines
+end
+
 def submit!(...)
   puts $aoc.submit(...)
 end
