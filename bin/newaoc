@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'fileutils'
+require 'pathname'
+
+OPTS = {
+  year: Time.now.year,
+  day: Time.now.day,
+  ext: 'rb'
+}
+
+OptParse.new do |op|
+  # no month, it's always december
+  op.on '-y', '--year=YEAR', Integer, (2015..)
+  op.on '-d', '--day=DAY', Integer, 1..25
+  op.on '-e', '--ext=EXTENSION', 'Set extension [default to .rb]'
+
+  op.parse! into: OPTS rescue op.abort
+
+  op.abort "no args allowed" unless $*.empty?
+end
+
+include FileUtils
+
+base = Pathname(__dir__).parent.join(OPTS[:year].to_s, day="day%02d" % OPTS[:day])
+
+mkdir_p base
+touch exe = base.join("#{day}.#{OPTS[:ext]}")
+chmod '+x', exe
+touch base.join('input.txt')
+touch base.join('sample.txt')
