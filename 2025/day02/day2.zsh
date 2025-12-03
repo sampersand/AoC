@@ -1,15 +1,17 @@
 #!/bin/zsh
-setopt rematchpcre
+setopt REMATCH_PCRE
 
-let part1=0 part2=0
-for raw_line in ${(s:,:):-$(cat ${@:-input.txt})}; do
-	range=( ${(s:-:)raw_line} )
+let part1=0
+let part2=0
 
-	for (( i=range[1]; i < range[2]; i++ )) {
-		if [[ $i =~ '^(\d+)\1$' ]] let part1+=i;
+for line in ${(s:,:):-$(cat ${@:-input.txt})}; do
+	range=( ${(s:-:)line} )
+
+	for (( i = range[1]; i < range[2]; ++i )) {
+		if [[ $i =~ '^(\d+)\1$'  ]] let part1+=i;
 		if [[ $i =~ '^(\d+)\1+$' ]] let part2+=i;
 	}
 done
 
-echo part1: $part1
-echo part2: $part2
+print part1: $part1
+print part2: $part2
