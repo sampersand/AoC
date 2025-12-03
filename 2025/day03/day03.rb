@@ -1,19 +1,22 @@
-$* << 'input.txt' if $*.empty?
-
 def find_largest(chars, remaining)
   return '' if remaining.zero?
 
   max = chars[..-remaining].max
-  max + find_largest(chars[chars.index(max)+1..], remaining-1)
+  rest = chars[chars.index(max)+1..]
+
+  max + find_largest(rest, remaining-1)
 end
 
-p1 = p2 = 0
-ARGF.each(chomp: true) {
-  p1 += find_largest(it.chars, 2).to_i
-  p2 += find_largest(it.chars, 12).to_i
-}
+part1 = part2 = 0
 
-p [p1, p2]
+File.foreach('input.txt') do |line|
+  chars = line.chomp.chars
 
-fail unless p1 == 16946
-fail unless p2 == 168627047606506
+  part1 += find_largest(chars, 2).to_i
+  part2 += find_largest(chars, 12).to_i
+end
+
+p [part1, part2]
+
+fail unless part1 == 16946
+fail unless part2 == 168627047606506
