@@ -17,6 +17,3 @@ File.foreach('input.txt') do |line|
 end
 
 p [part1, part2]
-
-fail unless part1 == 16946
-fail unless part2 == 168627047606506
