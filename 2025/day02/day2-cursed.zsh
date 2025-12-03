@@ -1,7 +1,7 @@
 #!/bin/zsh
 options[rematch_pcre]=on
 
-declare part{1,2}=0
+define part{1,2}=0
 for line in ${(s(,)):-$(<${@:-sample.txt})}
 	foreach i ({${line/-/..}}) {
 		if [[ $i =~ '^(\d+)\1$'  ]] let part1+=i
