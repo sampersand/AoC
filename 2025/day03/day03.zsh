@@ -1,23 +1,29 @@
 #!/bin/zsh
-function find-largest {
-  local remaining=$1
+
+# For this day, i thought it'd be fun to use ZSH's math functions:
+
+functions -M find_largest
+function find_largest {
+  local sub max remaining=$1
   shift
 
-  if (( remaining == 0 )) {
-    REPLY=
-    return
+  shift $@[(i)${max::=${${(O)@[1,-remaining]}[1]}}]
+
+  if (( --remaining )) {
+    let "sub=find_largest(remaining, ${(j:,:)@})"
   }
 
-  local max=${${(O)@[0,-remaining]}[1]}
-  local max_idx=${@[(i)$max]}
-  shift $max_idx
-  find-largest $((remaining - 1)) $@
-  REPLY=$max$REPLY
+  (( $max$sub ))
 }
 
 part1=0 part2=0
-<input.txt while read line; do
-  find-largest 2 ${(s::)line}; let "part1+=$REPLY"
-  find-largest 12 ${(s::)line}; let "part2+=$REPLY"
+<${@:-input.txt} while read raw; do
+  line=${(*)raw//(#m)?/,$MATCH}
+
+  ((
+    part1+=find_largest(2 $line),
+    part2+=find_largest(12 $line)
+  ))
 done
-print $part1 $part2
+
+print -aC2 part1: $part1 part2: $part2
