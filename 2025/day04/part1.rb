@@ -1,0 +1,21 @@
+GRID = {}
+input = File.read('input.txt')
+  .lines(chomp: true)
+  .each_with_index do |line, x|
+    line.chars.each_with_index do |char, y|
+      GRID[x+y.i] = 1 if char == '@'
+    end
+  end
+
+def neighbors(key)
+  [*-1..1].product([*-1..1])
+    .reject { _1 == _2 && _1 == 0 }
+    .map { key + (_1 + _2.i) }
+    .select(&GRID)
+end
+
+p (GRID.count do |key,|
+  neighbors(key).count < 4
+end)
+
+p GRID
