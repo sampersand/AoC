@@ -1,31 +1,17 @@
-$grid = Set.new
+$* << 'input.txt' if $*.empty?
 
-File.read('input.txt')
-  .lines(chomp: true)
-  .each_with_index do |line, x|
-    line.each_char.with_index do |char, y|
-      $grid << x+y.i if char == '@'
-    end
-  end
+$g=Set[]
+x=0;$<.map{|l|x+=1;y=0;l.chars{|c|y+=1;c==?@&&$g<< x+y.i}}
+def n(k)=[-1-1i,-1,-1+1i,-1i,1i,1-1i,1,1+1i].count{$g.include?k+it}
+o=t=0
+(
+  r=$g.select{n(it)<4};x=r.size
+  0==o&&o=x
+  t+=x
+  l=$g.size
+  $g-=r
+)while$g.size!=l
+p [o, t]
 
-S=[*-1..1].product([*-1..1]).map {_1+_2.i}.reject(&:zero?)
-# S=[-1-1i,-1,-1+1i,-1i,1i,1-1i,1,1+1i]
-
-def n(key)
-  S.map{ key + it }.count { $grid.include? it }
-end
-
-part2 = part2 = 0
-begin
-  r = $grid.select { n(it) < 4 }
-
-  part1 = r.count if part1.zero?
-  part2 += r.count
-
-  old_length = $grid.length
-  $grid -= r
-end while old_length != $grid.length
-
-fail unless part2 == 8277
-fail unless part1 == 1349
-p [part1, part2]
+fail unless t == 8277
+fail unless o == 1349
