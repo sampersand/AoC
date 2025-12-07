@@ -1,20 +1,21 @@
 $* << 'input.txt' if $*.empty?
-# $* << 'sample.txt' if $*.empty?
 
-$MEMO = {}
-def chase(pos, lines)
-  return 0 if lines.empty?
+MEMO = {}
+LINES = $<.to_a(chomp: true)
 
-  $MEMO[[pos, lines.length]] ||= begin
-    line, *lines = lines
-    case line[pos]
-    when '.' then chase(pos, lines)
-    when '^' then chase(pos-1, lines) + chase(pos+1, lines) + 1
-    else fail "#{line[pos].inspect}"
+def chase(pos, row)
+  return 0 if LINES[row].nil?
+
+  MEMO[[pos, row]] ||= begin
+    case LINES[row][pos]
+    when '.' then chase(pos, row+1)
+    when '^'
+      $part1 += 1
+      chase(pos-1, row+1) + chase(pos+1, row+1) + 1
     end
   end
 end
 
-data = $<.to_a(chomp: true)
-result = chase(data.shift.index('S'), data) + 1
-fail unless result == 187987920774390
+$part1 = 0
+part2 = 1 + chase(LINES.shift.index('S'), 0)
+puts $part1, part2
