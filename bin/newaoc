@@ -5,7 +5,7 @@ require 'pathname'
 
 OPTS = {
   year: Time.now.year,
-  day: Time.now.day,
+  day: Time.now.day + 1,
   ext: 'rb'
 }
 
