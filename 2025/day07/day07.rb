@@ -1,7 +1,7 @@
-$* << 'input.txt' if $*.empty?
+ARGV << 'input.txt' if ARGV.empty?
 
 MEMO = {}
-LINES = $<.to_a(chomp: true)
+LINES = ARGF.read.lines(chomp: true)
 
 def chase(pos, row)
   return 0 if LINES[row].nil?
