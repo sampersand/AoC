@@ -1,34 +1,20 @@
-$* << 'sample.txt' if $*.empty?
+# $* << 'sample.txt' if $*.empty?
+$* << 'input.txt' if $*.empty?
 
+COORDS = $<.map { it.chomp.split(',').map(&:to_i) }
 
-data = $<.map { it.chomp.split(',').map(&:to_i) }
-def dist(key, key2) = key.zip(key2).sum { (_1 - _2) ** 2 } ** 0.5
+def dist(coord1, coord2) = coord1.zip(coord2).sum { (_1-_2) ** 2 } ** 0.5
 
-def two_closest(data, connected)
-  closest = nil
+circuits = COORDS.map { [it] }
+# CIRCUITS = COORDS.to_h { [it => [it]] }
 
-  data.each do |key|
-    data.each do |key2|
-      next if key == key2
-      next if connected[key]&.include? key2 or connected[key2]&.include? key
-      d = dist key, key2
-
-      if closest.nil? || d < closest[-1]
-        closest = [key, key2, d]
-      end
-    end
-  end
-
-  closest
+for l, r in COORDS.combination(2).sort_by { dist _1, _2 }
+  lsrc = circuits.find { it.include? l }
+  rsrc = circuits.find { it.include? r }
+  next if lsrc == rsrc
+  circuits.delete lsrc
+  circuits.delete rsrc
+  circuits.push [*lsrc, *rsrc]
+  break if circuits.length == 1
 end
-
-connected = {}#Hash.new { _1[_2] = [] }
-loop do
-  closest = two_closest(data, connected)
-  break if closest.nil?
-  x, y, _ = two_closest(data, connected)
-  (connected[x]||=[]) << y
-  x, y, _ = two_closest(data, connected)
-end
-p connected
-p [x, y]
+fail unless 8465902405 == l[0] * r[0]
