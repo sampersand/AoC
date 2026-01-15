@@ -1,5 +1,5 @@
 CWD =: (<./CWD i:'/\') {.CWD=: ;(4!:3''){~4!:4 CWD=: <'CWD'
-raw =: }: freads CWD , '/day2.txt'
+raw =: }: freads CWD , '/input.txt'
 die =: {{ echo y throw. }}
 
 ints =: ". every ',' cut raw
