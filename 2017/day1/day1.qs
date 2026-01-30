@@ -16,7 +16,7 @@ Iterable.aoc2017day1 = self -> {
 		.sum()
 };
 
-list = Io.File('day1.txt')
+list = Io.File('input.txt')
 	.read()
 	.strip()
 	.map(~$@num)

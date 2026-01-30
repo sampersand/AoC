@@ -4,8 +4,8 @@ require 'fileutils'
 require 'pathname'
 
 OPTS = {
-  year: Time.now.year,
-  day: Time.now.day + 1,
+  year: nil,
+  day: nil,
   ext: 'rb'
 }
 
@@ -14,10 +14,20 @@ OptParse.new do |op|
   op.on '-y', '--year=YEAR', Integer, (2015..)
   op.on '-d', '--day=DAY', Integer, 1..25
   op.on '-e', '--ext=EXTENSION', 'Set extension [default to .rb]'
+  op.on '-n', '--now', 'Set current day' do
+    OPTS[:year] = Time.now.year
+    OPTS[:day] = Time.now.day
+  end
+
+  op.on '-t', '--tomorrow', 'Set for tomorrow' do
+    OPTS[:year] = Time.now.year
+    OPTS[:day] = Time.now.day + 1
+  end
 
   op.parse! into: OPTS rescue op.abort
 
   op.abort "no args allowed" unless $*.empty?
+  op.abort "day and year must be specified" unless OPTS[:year] && OPTS[:day]
 end
 
 include FileUtils
