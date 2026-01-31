@@ -22,27 +22,30 @@ print -l $part1 $part2
 
 exit
 
-older one that didnt use utils.zsh:
-# input=( "${(@f)$(<input.txt)}" )
-# integer part1
+## older one that didnt use utils.zsh:
 
-# for line ($input) {
-# 	ary=( ${(on)=line} )
-# 	let part1+='ary[-1] - ary[1]'
-# }
+input=( "${(@f)$(<input.txt)}" )
+integer part1
 
-# integer part2
-# for line ($input) {
-# 	ary=( ${(On)=line} )
+for line ($input) {
+	ary=( ${(on)=line} )
+	let part1+='ary[-1] - ary[1]'
+}
+print $part1
 
-# 	for (( i = 1; i <= $#ary; i++ )) {
-# 		for (( j = i + 1; j <= $#ary; j++ )) {
-# 			if (( (ary[i] / ary[j]) * ary[j] == ary[i] )) {
-# 				let part2+='ary[i] / ary[j]'
-# 				continue 2
-# 			}
-# 		}
-# 	}
-# }
+input=( "${(@f)$(<input.txt)}" )
+integer part2
+for line ($input) {
+	ary=( ${(On)=line} )
 
-# print -l $part1 $part2
+	for (( i = 1; i <= $#ary; i++ )) {
+		for (( j = i + 1; j <= $#ary; j++ )) {
+			if (( (ary[i] / ary[j]) * ary[j] == ary[i] )) {
+				let part2+='ary[i] / ary[j]'
+				continue 2
+			}
+		}
+	}
+}
+
+print $part2
